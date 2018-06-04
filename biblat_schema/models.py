@@ -7,10 +7,12 @@ from mongoengine import (
     IntField,
     EmbeddedDocument,
     BooleanField,
-    DictField,
+    EmbeddedDocumentField,
     EmbeddedDocumentListField,
     ReferenceField
 )
+
+from .marc import MarcDocumentField
 
 
 class Revista(Document):
@@ -120,7 +122,7 @@ class Documento(Document):
     descriptores_geograficos = EmbeddedDocumentListField(DescriptorGeografico)
     referencias = BooleanField()
     texto_completo = EmbeddedDocumentListField(UrlTextoCompleto)
-    marc21 = DictField(required=True)
+    marc21 = EmbeddedDocumentField(MarcDocumentField, required=True)
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
 
