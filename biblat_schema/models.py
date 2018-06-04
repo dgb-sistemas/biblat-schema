@@ -1,8 +1,22 @@
-from mongoengine import *
+# -*- coding: utf-8 -*-
+from mongoengine import (
+    Document,
+    EmbeddedDocumentField,
+    StringField,
+    DateTimeField,
+    ListField,
+    IntField,
+    EmbeddedDocument,
+    BooleanField,
+    DictField,
+    EmbeddedDocumentListField,
+    ReferenceField
+)
 
 
 class Revista(Document):
-    _id = StringField(max_length=32)
+    """Esquema de Revista"""
+    _id = StringField(max_length=32, primary_key=True, required=True)
     base_datos = StringField(max_length=5, required=True)
     titulo_revista = StringField(max_length=256, required=True)
     titulo_abreviado_revista = StringField(max_length=256)
@@ -12,7 +26,7 @@ class Revista(Document):
     disciplina_revista = StringField(max_length=32, required=True)
     licencia_cc = StringField(max_length=32)
     sherpa_romeo = StringField(max_length=32)
-    idioma = ListField(StringField(max_length=2), )
+    idioma = ListField(StringField(max_length=2))
     logo = StringField(max_length=100)
     portada = StringField(max_length=100)
     fecha_creacion = DateTimeField(required=True)
@@ -20,7 +34,9 @@ class Revista(Document):
 
 
 class Fasciculo(Document):
-    revista = StringField(max_length=32, required=True)
+    """Esquema de fasciculo"""
+    _id = StringField(max_length=32, primary_key=True, required=True)
+    revista = ReferenceField(Revista)
     volumen = IntField()
     numero = IntField()
     año = IntField(required=True)
@@ -32,28 +48,33 @@ class Fasciculo(Document):
 
 
 class Resumen(EmbeddedDocument):
+    """Esquema de resumen"""
     idioma = StringField(max_length=2, required=True)
     resumen = StringField(required=True)
 
 
 class PalabraClave(EmbeddedDocument):
+    """Esquema de palabra clave"""
     idioma = StringField(max_length=2, required=True)
     palabra_clave = StringField(max_length=100, required=True)
 
 
 class Autor(EmbeddedDocument):
+    """Esquema de autor"""
     nombre = StringField(max_length=100, required=True)
     correo_electronico = StringField(max_length=100)
     referencia = IntField()
 
 
-class Autor_Corporativo(EmbeddedDocument):
+class AutorCorporativo(EmbeddedDocument):
+    """Esquema de autor corporativo"""
     institucion = StringField(max_length=100, required=True)
     dependencia = StringField(max_length=100)
     pais = StringField(max_length=2)
 
 
 class Institucion(EmbeddedDocument):
+    """Esquema de institucion"""
     institucion = StringField(max_length=256, required=True)
     dependencia = StringField(max_length=256)
     ciudad_estado = StringField(max_length=256)
@@ -62,50 +83,57 @@ class Institucion(EmbeddedDocument):
 
 
 class UrlTextoCompleto(EmbeddedDocument):
+    """Esquema de Url de texto completo"""
     url = StringField(max_length=256, required=True)
     descripcion = StringField(max_length=100, required=True)
 
 
 class Subdisciplina(EmbeddedDocument):
+    """Esquema de sub-disciplina"""
     idioma = StringField(max_length=2, required=True)
     descripcion = StringField(max_length=100, required=True)
 
 
 class DescriptorGeografico(EmbeddedDocument):
+    """Esquema de descriptor geografico"""
     idioma = StringField(max_length=2, required=True)
     descripcion = StringField(max_length=100, required=True)
 
 
 class Documento(Document):
+    """Esquema de documento"""
     revista = StringField(max_length=32, required=True)
     fasciculo = StringField(max_length=32, required=True)
     titulo_documento = StringField(max_length=256, required=True)
     doi = StringField(max_length=256)
-    idioma = ListField(StringField(max_length=2), )
+    idioma = ListField(StringField(max_length=2))
     paginacion = StringField(max_length=100)
     autor = ListField(EmbeddedDocumentField(Autor))
-    autor_corporativo = ListField(EmbeddedDocumentField(Autor_Corporativo), )
-    institucion = ListField(EmbeddedDocumentField(Institucion), )
-    resumen = ListField(EmbeddedDocumentField(Resumen), )
-    palabra_clave = ListField(EmbeddedDocumentField(PalabraClave), required=True)
+    autor_corporativo = EmbeddedDocumentListField(AutorCorporativo)
+    institucion = EmbeddedDocumentListField(Institucion)
+    resumen = EmbeddedDocumentListField(Resumen)
+    palabra_clave = EmbeddedDocumentListField(PalabraClave, required=True)
     tipo_documento = StringField(max_length=100, required=True)
     enfoque_documento = StringField(max_length=100, required=True)
     disciplina = ListField(StringField(), required=True)
-    subdisciplinas = ListField(EmbeddedDocumentField(Subdisciplina), required=True)
-    descriptores_geograficos = ListField(EmbeddedDocumentField(Subdisciplina))
+    subdisciplinas = EmbeddedDocumentListField(Subdisciplina)
+    descriptores_geograficos = EmbeddedDocumentListField(
+        DescriptorGeografico)
     referencias = BooleanField()
-    texto_completo = ListField(EmbeddedDocumentField(UrlTextoCompleto))
+    texto_completo = EmbeddedDocumentListField(UrlTextoCompleto)
     marc21 = DictField(required=True)
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
 
 
 class Historico(EmbeddedDocument):
+    """Esquema historico"""
     catalogador = StringField(max_length=100, required=True)
     nivel = IntField(required=True)
     fecha_hora = DateTimeField(required=True)
 
 
 class HistorialCatalogacion(Document):
+    """Esquema de historial de catalogacion"""
     documento = StringField(max_length=32, required=True)
-    catalogacion = ListField(EmbeddedDocumentField(Historico), required=True)
+    catalogacion = EmbeddedDocumentListField(Historico, required=True)
