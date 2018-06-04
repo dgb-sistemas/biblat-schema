@@ -6,4 +6,4 @@ install:
   - pip install -r requirements.txt
 script:
   - coverage run --source biblat_schema setup.py test
-  - coverare report
+  - coverage report
