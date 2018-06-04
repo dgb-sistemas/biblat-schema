@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from mongoengine import (
     Document,
-    EmbeddedDocumentField,
     StringField,
     DateTimeField,
     ListField,
@@ -39,7 +38,7 @@ class Fasciculo(Document):
     revista = ReferenceField(Revista)
     volumen = IntField()
     numero = IntField()
-    año = IntField(required=True)
+    anio = IntField(required=True)
     mes_inicial = IntField(required=True)
     mes_final = IntField(required=True)
     parte = StringField(max_length=100)
@@ -102,13 +101,14 @@ class DescriptorGeografico(EmbeddedDocument):
 
 class Documento(Document):
     """Esquema de documento"""
-    revista = StringField(max_length=32, required=True)
-    fasciculo = StringField(max_length=32, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True)
+    revista = ReferenceField(Revista)
+    fasciculo = ReferenceField(Fasciculo)
     titulo_documento = StringField(max_length=256, required=True)
     doi = StringField(max_length=256)
     idioma = ListField(StringField(max_length=2))
     paginacion = StringField(max_length=100)
-    autor = ListField(EmbeddedDocumentField(Autor))
+    autor = EmbeddedDocumentListField(Autor)
     autor_corporativo = EmbeddedDocumentListField(AutorCorporativo)
     institucion = EmbeddedDocumentListField(Institucion)
     resumen = EmbeddedDocumentListField(Resumen)
@@ -117,8 +117,7 @@ class Documento(Document):
     enfoque_documento = StringField(max_length=100, required=True)
     disciplina = ListField(StringField(), required=True)
     subdisciplinas = EmbeddedDocumentListField(Subdisciplina)
-    descriptores_geograficos = EmbeddedDocumentListField(
-        DescriptorGeografico)
+    descriptores_geograficos = EmbeddedDocumentListField(DescriptorGeografico)
     referencias = BooleanField()
     texto_completo = EmbeddedDocumentListField(UrlTextoCompleto)
     marc21 = DictField(required=True)
