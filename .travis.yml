@@ -3,4 +3,5 @@ python:
   - "3.5"
   - "3.6"
 script:
-- python setup.py develop
+- coverage run --source biblat_schema setup.py test
+- coverare report
