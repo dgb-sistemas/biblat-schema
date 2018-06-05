@@ -34,7 +34,7 @@ class Marc036Field(EmbeddedDocument):
 
 
 class Marc041Field(EmbeddedDocument):
-    """021a = Idioma del documento"""
+    """041a = Idioma del documento"""
     a = StringField(max_length=2000)
 
 
@@ -125,14 +125,14 @@ class Marc520Field(EmbeddedDocument):
 
 
 class Marc546Field(EmbeddedDocument):
-    """504a = Idioma del resumen"""
+    """546a = Idioma del resumen"""
     a = StringField(max_length=2000)
 
 
 class Marc590Field(EmbeddedDocument):
     """
     590a = Tipo de documento
-    590a = Enfoque del documento
+    590b = Enfoque del documento
     """
     a = StringField(max_length=2000)
     b = StringField(max_length=2000)
@@ -154,7 +154,7 @@ class Marc653Field(EmbeddedDocument):
 
 
 class Marc654Field(EmbeddedDocument):
-    """653a = Keyword"""
+    """654a = Keyword"""
     a = StringField(max_length=2000)
 
 
@@ -187,7 +187,7 @@ class MarcFMTField(EmbeddedDocument):
 
 
 class MarcLDRField(EmbeddedDocument):
-    """Etiqueta de control OWN"""
+    """Etiqueta de control LDR"""
     fixed = StringField(max_length=24, db_field='#',
                         default='00000nab^a2200000zi^4500')
 
