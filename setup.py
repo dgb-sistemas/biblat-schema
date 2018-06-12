@@ -21,7 +21,9 @@ setup(
     install_requires=[
         "mongoengine>=0.15.0"
     ],
-    tests_require=[],
+    tests_require=[
+        "mongomock"
+    ],
     dependency_links=[],
-    test_suite=''
+    test_suite='tests.discover_suite'
 )
