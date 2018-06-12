@@ -3,17 +3,11 @@ from mongoengine import (
     Document,
     StringField,
     EmbeddedDocument,
-    EmbeddedDocumentField,
-    ListField
+    EmbeddedDocumentField
 )
 
 
 class I18NField(EmbeddedDocument):
-    es = StringField()
-    en = StringField()
-
-
-class I18DField(EmbeddedDocument):
     es = StringField()
     en = StringField()
 
@@ -45,14 +39,14 @@ class TipoDocumento(Document):
     """Esquema de catalogo tipo documento"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
-    descripcion = EmbeddedDocumentField(I18DField)
+    descripcion = EmbeddedDocumentField(I18NField)
 
 
 class EnfoqueDocumento(Document):
     """Esquema de catalogo enfoque documento"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
-    descripcion = EmbeddedDocumentField(I18DField)
+    descripcion = EmbeddedDocumentField(I18NField)
 
 
 class Disciplina(Document):
@@ -84,7 +78,7 @@ class LicenciaCC(Document):
     """Esquema de catalogo licencia"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     tipo = StringField(max_length=6, required=True)
-    descripcion = EmbeddedDocumentField(I18DField)
+    descripcion = EmbeddedDocumentField(I18NField)
 
 
 class SherpaRomeo(Document):
