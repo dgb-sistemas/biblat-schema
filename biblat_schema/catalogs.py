@@ -3,7 +3,8 @@ from mongoengine import (
     Document,
     StringField,
     EmbeddedDocument,
-    EmbeddedDocumentField
+    EmbeddedDocumentField,
+    URLField
 )
 
 
@@ -78,11 +79,12 @@ class LicenciaCC(Document):
     """Esquema de catalogo licencia"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     tipo = StringField(max_length=6, required=True)
-    descripcion = EmbeddedDocumentField(I18NField)
+    url = URLField(required=True)
 
 
 class SherpaRomeo(Document):
     """Esquema de catalogo sherpa romeo"""
     _id = StringField(max_length=32, primary_key=True, required=True)
-    color = StringField(max_length=10, required=True)
-    politica = StringField(max_length=70, required=True)
+    color = EmbeddedDocumentField(I18NField)
+    politica = EmbeddedDocumentField(I18NField)
+    codigo = StringField(required=True)
