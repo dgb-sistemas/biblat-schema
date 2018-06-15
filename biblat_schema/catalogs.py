@@ -15,7 +15,7 @@ class I18NField(EmbeddedDocument):
 
 class Pais(Document):
     """Esquema de catalogo pais"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=2, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
     alpha2 = StringField(max_length=2, required=True)
     alpha3 = StringField(max_length=3, required=True)
@@ -31,8 +31,9 @@ class Pais(Document):
 
 class Idioma(Document):
     """Esquema de catalogo idioma"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
-    codigo = StringField(min_length=3, max_length=3, required=True)
+    _id = StringField(max_length=3, primary_key=True, required=True)
+    iso_639_1 = StringField(min_length=2, max_length=2)
+    iso_639_2 = StringField(min_length=3, max_length=3, required=True)
     nombre = EmbeddedDocumentField(I18NField)
 
 
