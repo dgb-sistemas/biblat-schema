@@ -4,6 +4,7 @@ from mongoengine import (
     StringField,
     EmbeddedDocument,
     EmbeddedDocumentField,
+    ReferenceField,
     URLField
 )
 
@@ -60,6 +61,7 @@ class Disciplina(Document):
 class SubDisciplina(Document):
     """Esquema de catalogo subdisciplina"""
     _id = StringField(max_length=32, primary_key=True, required=True)
+    disciplina = ReferenceField(Disciplina, required=True)
     nombre = EmbeddedDocumentField(I18NField)
 
 
