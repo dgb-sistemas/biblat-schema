@@ -46,6 +46,17 @@ class Revista(Document):
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
 
+    meta = {
+        'collection': 'revistas',
+        'indexes': [
+            'base_datos',
+            'titulo',
+            'issn',
+            'pais',
+            'disciplina'
+        ]
+    }
+
 
 class Fasciculo(Document):
     """Esquema de fascículo"""
@@ -59,6 +70,14 @@ class Fasciculo(Document):
     parte = StringField(max_length=100)
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
+
+    meta = {
+        'collection': 'fasciculos',
+        'indexes': [
+            'revista',
+            'anio'
+        ]
+    }
 
 
 class Resumen(EmbeddedDocument):
@@ -127,6 +146,18 @@ class Documento(Document):
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
 
+    meta = {
+        'collection': 'documentos',
+        'indexes': [
+            'revista',
+            'fasciculo',
+            'numero_sistema',
+            'titulo_documento',
+            'doi',
+            'idioma'
+        ]
+    }
+
 
 class Historico(EmbeddedDocument):
     """Esquema histórico"""
@@ -139,3 +170,10 @@ class HistorialCatalogacion(Document):
     """Esquema de historial de catalogación"""
     documento = StringField(max_length=32, required=True)
     catalogacion = EmbeddedDocumentListField(Historico, required=True)
+
+    meta = {
+        'collection': 'historial_catalogacion',
+        'indexes': [
+            'documento'
+        ]
+    }
