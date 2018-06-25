@@ -126,6 +126,7 @@ class Documento(Document):
     _id = StringField(max_length=32, primary_key=True, required=True)
     revista = ReferenceField(Revista, required=True)
     fasciculo = ReferenceField(Fasciculo, required=True)
+    numero_sistema = StringField(max_length=14, required=True)
     titulo_documento = StringField(max_length=256, required=True)
     doi = StringField(max_length=256)
     idioma = ListField(ReferenceField(Idioma))
@@ -168,7 +169,8 @@ class Historico(EmbeddedDocument):
 
 class HistorialCatalogacion(Document):
     """Esquema de historial de catalogación"""
-    documento = StringField(max_length=32, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True)
+    documento = ReferenceField(Documento, required=True)
     catalogacion = EmbeddedDocumentListField(Historico, required=True)
 
     meta = {
