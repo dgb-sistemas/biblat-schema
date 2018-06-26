@@ -9,16 +9,69 @@ from biblat_schema.models import (
     Institucion,
     Resumen,
     PalabraClave,
-    Subdisciplina,
-    DescriptorGeografico,
-    UrlTextoCompleto
+    SubDisciplina,
+    NombreGeografico,
+    UrlTextoCompleto,
+    TipoDocumento,
+    EnfoqueDocumento
 )
+from biblat_schema.catalogs import I18NField, Disciplina
 from .base import BaseTestCase
 from biblat_schema.marc import MarcDocumentField
 
 
 class TestDocumentModel(BaseTestCase):
-    model_class_to_delete = [Documento]
+    model_class_to_delete = [Documento, Revista, Fasciculo, Autor,
+                             AutorCorporativo, Institucion, Resumen,
+                             PalabraClave, SubDisciplina, NombreGeografico,
+                             UrlTextoCompleto, TipoDocumento,
+                             EnfoqueDocumento, I18NField, Disciplina,
+                             MarcDocumentField]
+
+    def _crea_tipo_documento(self):
+        _id = self.generate_uuid_32_string()
+        nombre = self._crea_nombre()
+        descripcion = self._crea_I18NField_nombre()
+        tipo_documento_data = {
+            '_id': _id,
+            'nombre': nombre,
+            'descripcion': descripcion
+        }
+        return TipoDocumento(**tipo_documento_data)
+
+    def _crea_enfoque_documento(self):
+        _id = self.generate_uuid_32_string()
+        nombre = self._crea_nombre()
+        descripcion = self._crea_I18NField_nombre()
+        enfoque_documento_data = {
+            '_id': _id,
+            'nombre': nombre,
+            'descripcion': descripcion
+        }
+        return EnfoqueDocumento(**enfoque_documento_data)
+
+    def _crea_I18NField_nombre(self):
+        I18NField_data = {
+            'es': 'Estados Unidos de Norteamerica',
+            'en': 'United States of America'
+        }
+        return I18NField(**I18NField_data)
+
+    def _crea_disciplina(self):
+        _id = self.generate_uuid_32_string()
+        nombre = self._crea_nombre()
+        disciplina_data = {
+            '_id': _id,
+            'nombre': nombre
+        }
+        return Disciplina(** disciplina_data)
+
+    def _crea_nombre(self):
+        sub_disciplina_data = {
+            'es': 'Biologia',
+            'en': 'Biology'
+        }
+        return I18NField(** sub_disciplina_data)
 
     def _crea_marc_document_field(self):
 
@@ -107,20 +160,25 @@ class TestDocumentModel(BaseTestCase):
         return PalabraClave(**palabra_clave_data)
 
     def _crea_subdisciplina(self):
+        _id = self.generate_uuid_32_string()
+        disciplina = self._crea_disciplina()
+        nombre = self._crea_nombre()
         subdisciplina_data = {
-            'idioma': 'ES',
-            'descripcion': 'Estudios de cultura náhuatl'
+            '_id': _id,
+            'disciplina': disciplina,
+            'nombre': nombre
         }
-
-        # Guardamos
-        return Subdisciplina(**subdisciplina_data)
+        return SubDisciplina(**subdisciplina_data)
 
     def _crea_descriptor_geografico(self):
-        descriptor_geografico_data = {
-            'idioma': 'ES',
-            'descripcion': 'Estudios de cultura náhuatl'
+        _id = self.generate_uuid_32_string()
+        nombre = self._crea_I18NField_nombre()
+        nombre_geografico_data = {
+            '_id': _id,
+            'nombre': nombre
+
         }
-        return DescriptorGeografico(**descriptor_geografico_data)
+        return NombreGeografico(**nombre_geografico_data)
 
     def _crea_url_texto_completo(self):
         url_texto_completo_data = {
@@ -142,9 +200,12 @@ class TestDocumentModel(BaseTestCase):
         resumen = self._crea_resumen()
         palabra_clave = self._crea_palabra_clave()
         subdisciplina = self._crea_subdisciplina()
-        descriptores_geograficos = self._crea_descriptor_geografico()
+        nombres_geograficos = self._crea_descriptor_geografico()
         url_texto_completo = self._crea_url_texto_completo()
         marc21 = self._crea_marc_document_field()
+        tipo_documento = self._crea_tipo_documento()
+        enfoque_documento = self._crea_enfoque_documento()
+        disciplina = self._crea_disciplina()
 
         _id = self.generate_uuid_32_string()
         documento_data = {
@@ -153,18 +214,17 @@ class TestDocumentModel(BaseTestCase):
             'fasciculo': fasciculo,
             'titulo_documento': 'Estudios de cultura náhuatl',
             'doi': '10.1145/1067268.1067287',
-            'idioma': ['es'],
             'paginacion': 'paginacion',
             'autor': [autor],
             'autor_corporativo': [autor_corporativo],
             'institucion': [institucion],
             'resumen': [resumen],
             'palabra_clave': [palabra_clave],
-            'tipo_documento': 'articulo',
-            'enfoque_documento': 'Arte',
-            'disciplina': ['Artes Visuales'],
+            'tipo_documento': tipo_documento,
+            'enfoque_documento': enfoque_documento,
+            'disciplina': [disciplina],
             'subdisciplinas': [subdisciplina],
-            'descriptores_geograficos': [descriptores_geograficos],
+            'nombres_geograficos': [nombres_geograficos],
             'referencias': True,
             'texto_completo': [url_texto_completo],
             'marc21': marc21,
@@ -188,8 +248,6 @@ class TestDocumentModel(BaseTestCase):
                          documento_doc.titulo_documento)
         self.assertEqual(documento_data['doi'],
                          documento_doc.doi)
-        self.assertEqual(documento_data['idioma'],
-                         documento_doc.idioma)
         self.assertEqual(documento_data['paginacion'],
                          documento_doc.paginacion)
         self.assertEqual(documento_data['autor'],
@@ -210,9 +268,8 @@ class TestDocumentModel(BaseTestCase):
                          documento_doc.disciplina)
         self.assertEqual(documento_data['subdisciplinas'],
                          documento_doc.subdisciplinas)
-
-        self.assertEqual(documento_data['descriptores_geograficos'],
-                         documento_doc.descriptores_geograficos)
+        self.assertEqual(documento_data['nombres_geograficos'],
+                         documento_doc.nombres_geograficos)
         self.assertEqual(documento_data['referencias'],
                          documento_doc.referencias)
         self.assertEqual(documento_data['texto_completo'],

@@ -1,16 +1,35 @@
 # coding: utf-8
 from biblat_schema.models import PalabraClave
+from biblat_schema.catalogs import I18NField, Idioma
 from .base import BaseTestCase
 
 
 class TestKeyWordModel(BaseTestCase):
-    model_class_to_delete = [PalabraClave]
+    model_class_to_delete = [PalabraClave, I18NField, Idioma]
+
+    def _crea_nombre(self):
+        nombre_data = {
+            'es': 'Español',
+            'en': 'Spanish'
+        }
+        return I18NField(** nombre_data)
+
+    def _crea_idioma(self):
+        _id = self.generate_uuid_32_string()
+        nombre = self._crea_nombre()
+        idioma_data = {
+            '_id': _id,
+            'iso_639_1': 'es',
+            'iso_639_2': 'spa',
+            'nombre': nombre
+        }
+        return Idioma(**idioma_data)
 
     def test_solo_campos_requeridos(self):
         # Datos
-
+        idioma = self._crea_idioma()
         palabra_clave_data = {
-            'idioma': 'es',
+            'idioma': idioma,
             'palabra_clave': 'estudio'
         }
 
