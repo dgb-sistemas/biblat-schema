@@ -5,7 +5,8 @@ from mongoengine import (
     EmbeddedDocument,
     EmbeddedDocumentField,
     ReferenceField,
-    URLField
+    URLField,
+    EmbeddedDocumentListField
 )
 
 
@@ -55,7 +56,7 @@ class EnfoqueDocumento(Document):
 class Disciplina(Document):
     """Esquema de catalogo disciplina"""
     _id = StringField(max_length=32, primary_key=True, required=True)
-    nombre = EmbeddedDocumentField(I18NField)
+    nombre = EmbeddedDocumentListField(I18NField)
 
 
 class SubDisciplina(Document):
@@ -86,7 +87,11 @@ class LicenciaCC(Document):
 
 
 class SherpaRomeo(Document):
-    """Esquema de catalogo sherpa romeo"""
+    """
+        Esquema de catalogo sherpa romeo
+        * Campo: codigo. Valor: hexadecimal. Ej. Color verde el código podría
+        ser #04B404
+    """
     _id = StringField(max_length=32, primary_key=True, required=True)
     color = EmbeddedDocumentField(I18NField)
     politica = EmbeddedDocumentField(I18NField)
