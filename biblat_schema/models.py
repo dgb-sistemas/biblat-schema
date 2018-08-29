@@ -53,7 +53,8 @@ class Revista(Document):
             'titulo',
             'issn',
             'pais',
-            'disciplina'
+            'disciplina',
+            'idioma'
         ]
     }
 
@@ -75,7 +76,9 @@ class Fasciculo(Document):
         'collection': 'fasciculos',
         'indexes': [
             'revista',
-            'anio'
+            'anio',
+            'volumen',
+            'numero'
         ]
     }
 
@@ -151,6 +154,9 @@ class Documento(Document):
         'collection': 'documentos',
         'indexes': [
             'revista',
+            'autor',
+            'institucion',
+            'palabra_clave',
             'fasciculo',
             'numero_sistema',
             'titulo_documento',
