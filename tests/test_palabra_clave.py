@@ -7,16 +7,13 @@ from .base import BaseTestCase
 class TestKeyWordModel(BaseTestCase):
     model_class_to_delete = [PalabraClave, I18NField, Idioma]
 
-    def _crea_nombre(self):
-        nombre_data = {
-            'es': 'Español',
-            'en': 'Spanish'
-        }
-        return I18NField(** nombre_data)
 
     def _crea_idioma(self):
         _id = self.generate_uuid_32_string()
-        nombre = self._crea_nombre()
+        nombre = I18NField(** {
+            'es': 'Español',
+            'en': 'Spanish'
+        })
         idioma_data = {
             '_id': _id,
             'iso_639_1': 'es',

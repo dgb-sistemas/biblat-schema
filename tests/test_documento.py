@@ -15,7 +15,7 @@ from biblat_schema.models import (
     TipoDocumento,
     EnfoqueDocumento
 )
-from biblat_schema.catalogs import I18NField, Disciplina
+from biblat_schema.catalogs import I18NField, Disciplina, Pais
 from .base import BaseTestCase
 from biblat_schema.marc import MarcDocumentField
 
@@ -28,53 +28,81 @@ class TestDocumentModel(BaseTestCase):
                              EnfoqueDocumento, I18NField, Disciplina,
                              MarcDocumentField]
 
+    def _crea_pais(self):
+        _id = self.generate_uuid_32_string()
+
+        pais_data = {
+            '_id': _id,
+            "nombre": {
+                "es": "",
+                "en": "Mexico"
+            },
+            "alpha2": "MX",
+            "alpha3": "MEX",
+            "codigo_pais": "484",
+            "iso_3166_2": "ISO 3166-2:MX",
+            "region": {
+                "es": "",
+                "en": "Americas"
+            },
+            "sub_region": {
+                "es": "",
+                "en": "Latin America and the Caribbean"
+            },
+            "intermediate_region": {
+                "es": "Centroamérica",
+                "en": "Central America"
+            },
+            "codigo_region": "019",
+            "codigo_sub_region": "419",
+            "region_intermedia": "013"
+        }
+
+        return Pais(**pais_data)
+
     def _crea_tipo_documento(self):
         _id = self.generate_uuid_32_string()
-        nombre = self._crea_nombre()
-        descripcion = self._crea_I18NField_nombre()
+
         tipo_documento_data = {
             '_id': _id,
-            'nombre': nombre,
-            'descripcion': descripcion
+            'nombre': {
+                'es': 'Biologia',
+                'en': 'Biology'
+            },
+            'descripcion': {
+                'es': 'Estados Unidos de Norteamerica',
+                'en': 'United States of America'
+            }
         }
         return TipoDocumento(**tipo_documento_data)
 
     def _crea_enfoque_documento(self):
         _id = self.generate_uuid_32_string()
-        nombre = self._crea_nombre()
-        descripcion = self._crea_I18NField_nombre()
         enfoque_documento_data = {
             '_id': _id,
-            'nombre': nombre,
-            'descripcion': descripcion
+            'nombre': {
+                'es': 'Biologia',
+                'en': 'Biology'
+            },
+            'descripcion': {
+                'es': 'Estados Unidos de Norteamerica',
+                'en': 'United States of America'
+            }
         }
         return EnfoqueDocumento(**enfoque_documento_data)
 
-    def _crea_I18NField_nombre(self):
-        I18NField_data = {
-            'es': 'Estados Unidos de Norteamerica',
-            'en': 'United States of America'
-        }
-        return I18NField(**I18NField_data)
-
     def _crea_disciplina(self):
         _id = self.generate_uuid_32_string()
-        nombre = self._crea_nombre()
         disciplina_data = {
             '_id': _id,
-            'nombre': nombre
+            'nombre': {
+                'es': 'Biologia',
+                'en': 'Biology'
+            }
         }
-        return Disciplina(** disciplina_data)
-
-    def _crea_nombre(self):
-        sub_disciplina_data = {
-            'es': 'Biologia',
-            'en': 'Biology'
-        }
-        return I18NField(** sub_disciplina_data)
+        return Disciplina(**disciplina_data)
 
     def _crea_marc_document_field(self):
-
         marc_document_data = {
         }
         return MarcDocumentField(**marc_document_data)
@@ -110,98 +138,85 @@ class TestDocumentModel(BaseTestCase):
         }
         return Fasciculo(**fasciculo_data)
 
-    def _crea_autor(self):
-        autor_data = {
-            'nombre': 'Montalvo Espinoza, J.L.',
-            'correo_electronico': 'sandokan55@gmail.com ',
-            'referencia': 1
-
-        }
-        return Autor(**autor_data)
-
-    def _crea_autor_corporativo(self):
-        autor_corporativo_data = {
-            'institucion': 'Ingeniería (México, D.F.)',
-            'dependencia': 'Ingeniería (México, D.F.)',
-            'pais': 'MX'
-        }
-
-        # Guardamos
-        return AutorCorporativo(**autor_corporativo_data)
-
-    def _crea_institucion(self):
-        institucion_data = {
-            'institucion': 'Universidad de Chapingo ',
-            'dependencia': 'Filosofia',
-            'ciudad_estado': 'Acapulco Guerrero',
-            'pais': 'MX',
-            'referencia': 1
-        }
-
-        # Guardamos
-        return Institucion(**institucion_data)
-
-    def _crea_resumen(self):
-        resumen_data = {
-            'idioma': 'es',
-            'resumen': 'Resumen del documento '
-        }
-
-        # Guardamos
-        return Resumen(**resumen_data)
-
-    def _crea_palabra_clave(self):
-        palabra_clave_data = {
-            'idioma': 'es',
-            'palabra_clave': 'estudio'
-        }
-
-        # Guardamos
-        return PalabraClave(**palabra_clave_data)
-
     def _crea_subdisciplina(self):
         _id = self.generate_uuid_32_string()
         disciplina = self._crea_disciplina()
-        nombre = self._crea_nombre()
         subdisciplina_data = {
             '_id': _id,
             'disciplina': disciplina,
-            'nombre': nombre
+            'nombre': {
+                'es': 'Biologia',
+                'en': 'Biology'
+            }
         }
         return SubDisciplina(**subdisciplina_data)
 
     def _crea_descriptor_geografico(self):
         _id = self.generate_uuid_32_string()
-        nombre = self._crea_I18NField_nombre()
+        # nombre = self._crea_I18NField_nombre()
         nombre_geografico_data = {
             '_id': _id,
-            'nombre': nombre
-
+            'nombre': {
+                'es': 'México',
+                'en': 'Mexico'
+            }
         }
         return NombreGeografico(**nombre_geografico_data)
 
-    def _crea_url_texto_completo(self):
-        url_texto_completo_data = {
-            'url': 'http://132.248.9.34/hevila/e-BIBLAT/PERIODICA/per7857.pdf',
-            'descripcion': 'Estudios de cultura nahuatl'
-        }
-
-        # Guardamos
-        return UrlTextoCompleto(**url_texto_completo_data)
-
     def test_solo_campos_requeridos(self):
-
         # Datos
         revista = self._crea_revista()
         fasciculo = self._crea_fasciculo()
-        autor = self._crea_autor()
-        autor_corporativo = self._crea_autor_corporativo()
-        institucion = self._crea_institucion()
-        resumen = self._crea_resumen()
-        palabra_clave = self._crea_palabra_clave()
+        pais = self._crea_pais()
+        autor = Autor(**{
+            'nombre': 'Vázquez Leal, H.',
+            'correo_electronico': 'hvazquez@uv.mx',
+            'referencia': 1
+
+        })
+        autor_corporativo = AutorCorporativo(**{
+            'institucion': 'Universidad Veracruzana',
+            'dependencia': 'Escuela de Instrumentación Electrónica y '
+                           'Ciencias Atmosféricas',
+            'pais': pais
+        })
+        institucion = Institucion(**{
+            'institucion': 'Universidad de Chapingo ',
+            'dependencia': 'Filosofia',
+            'ciudad_estado': 'Acapulco Guerrero',
+            'pais': 'MX',
+            'referencia': 1
+        })
+        resumen = Resumen(**{
+            'idioma': 'es',
+            'resumen': 'En este artículo el Método de Perturbación (PM) es '
+                       'empleado para obtener una solución aproximada para '
+                       'el problema de Troesch. Además describiremos el uso '
+                       'de la Transformada de Laplace y la Aproximación de '
+                       'Padé para trabajar con las series truncadas '
+                       'obtenidas por el Método de Perturbación, '
+                       'y así obtener soluciones aproximadas compactas. '
+                       'Finalmente se propone una tabla comparativa entre la '
+                       'solución propuesta y otras soluciones reportadas en '
+                       'la '
+                       'literatura: Método de Descomposición de Adomian, '
+                       'Método de Perturbación Homotópica, Método de '
+                       'Análisis Homotópico y la solución numérica exacta. '
+                       'Los resultados muestran que nuestra solución es la '
+                       'más exacta (Error Relativo Absoluto '
+                       'Promedio1.705648354x10-8).'
+        })
+        palabra_clave = PalabraClave(**{
+            'idioma': 'es',
+            'palabra_clave': 'Matemáticas'
+        })
+
         subdisciplina = self._crea_subdisciplina()
         nombres_geograficos = self._crea_descriptor_geografico()
-        url_texto_completo = self._crea_url_texto_completo()
+        url_texto_completo = UrlTextoCompleto(**{
+            'url': 'http://132.248.9.34/hevila/e-BIBLAT/PERIODICA/per7857.pdf',
+            'descripcion': 'Estudios de cultura nahuatl'
+        })
         marc21 = self._crea_marc_document_field()
         tipo_documento = self._crea_tipo_documento()
         enfoque_documento = self._crea_enfoque_documento()

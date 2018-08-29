@@ -7,16 +7,12 @@ from .base import BaseTestCase
 class TestSubdisciplineModel(BaseTestCase):
     model_class_to_delete = [SubDisciplina, Disciplina, I18NField, Idioma]
 
-    def _crea_nombre(self):
-        nombre_data = {
+    def _crea_idioma(self):
+        _id = self.generate_uuid_32_string()
+        nombre = {
             'es': 'Español',
             'en': 'Spanish'
         }
-        return I18NField(** nombre_data)
-
-    def _crea_idioma(self):
-        _id = self.generate_uuid_32_string()
-        nombre = self._crea_nombre()
         idioma_data = {
             '_id': _id,
             'iso_639_1': 'es',
@@ -45,7 +41,10 @@ class TestSubdisciplineModel(BaseTestCase):
         # Datos
         _id = self.generate_uuid_32_string()
         disciplina = self._crea_disciplina()
-        nombre = self._crea_nombre()
+        nombre = I18NField(**{
+            'es': 'Biologia',
+            'en': 'Biology'
+        })
         subdisciplina_data = {
             '_id': _id,
             'disciplina': disciplina,

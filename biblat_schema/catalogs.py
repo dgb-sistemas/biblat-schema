@@ -5,7 +5,8 @@ from mongoengine import (
     EmbeddedDocument,
     EmbeddedDocumentField,
     ReferenceField,
-    URLField
+    URLField,
+    ListField
 )
 
 
@@ -15,7 +16,14 @@ class I18NField(EmbeddedDocument):
 
 
 class Pais(Document):
-    """Esquema de catalogo pais"""
+    """Esquema de catalogo pais
+    alpha2: codigo de pais en dos caracteres
+    alpha: codigo de pais en tres caracteres
+    codigo_pais: Codigo numerico de pais
+    iso_3166-2: de identificación de las principales subdivisiones (por
+    ejemplo, provincias o estados) de todos los países codificados en ISO
+    3166-1
+    """
     _id = StringField(max_length=2, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
     alpha2 = StringField(max_length=2, required=True)
@@ -31,7 +39,12 @@ class Pais(Document):
 
 
 class Idioma(Document):
-    """Esquema de catalogo idioma"""
+    """Esquema de catalogo idioma
+    iso_639_1:códigos de dos letras usados para identificar los idiomas
+    principales del mundo
+    iso_639_2:códigos de tres letras usados para identificar los idiomas
+    principales del mundo
+    """
     _id = StringField(max_length=3, primary_key=True, required=True)
     iso_639_1 = StringField(min_length=2, max_length=2)
     iso_639_2 = StringField(min_length=3, max_length=3, required=True)
@@ -74,19 +87,25 @@ class NombreGeografico(Document):
 class DisciplinaRevista(Document):
     """Esquema de catalogo disciplina revista"""
     _id = StringField(max_length=32, primary_key=True, required=True)
-    base = StringField(max_length=10, required=True)
+    base = ListField(StringField(max_length=10, required=True))
     nombre = EmbeddedDocumentField(I18NField)
 
 
 class LicenciaCC(Document):
-    """Esquema de catalogo licencia"""
+    """Esquema de catalogo licencia
+    tipo: tipo de licencia creative commons
+    url: url del legal code de la licencia
+    """
     _id = StringField(max_length=32, primary_key=True, required=True)
     tipo = StringField(max_length=6, required=True)
     url = URLField(required=True)
 
 
 class SherpaRomeo(Document):
-    """Esquema de catalogo sherpa romeo"""
+    """Esquema de catalogo sherpa romeo
+    politica: especificacion de la politica utilizada
+    codigo: codigo hexagecimal utilizado por el color
+    """
     _id = StringField(max_length=32, primary_key=True, required=True)
     color = EmbeddedDocumentField(I18NField)
     politica = EmbeddedDocumentField(I18NField)

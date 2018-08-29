@@ -11,11 +11,13 @@ class TestFascicleModel(BaseTestCase):
         _id = self.generate_uuid_32_string()
         revista_data = {
             '_id': _id,
-            'base_datos': 'CLA01',
-            'titulo': u'Estudios de cultura náhuatl',
-            'issn': '0071-1675',
+            'base_datos': 'PER01',
+            'titulo': u'Perturbation Method and Laplace-Padé Approximation '
+                      u'as a Novel Tool to Find Approximate Solutions for '
+                      u'Troeschs Problem',
+            'issn': '2007-0705',
             'pais': 'MX',
-            'disciplina': u'Antropología',
+            'disciplina': u'Multidisciplinaria',
             'fecha_creacion': datetime.now(),
             'fecha_actualizacion': datetime.now(),
         }
@@ -29,12 +31,12 @@ class TestFascicleModel(BaseTestCase):
         fasciculo_data = {
             '_id': _id,
             'revista': revista_doc,
-            'volumen': 1,
-            'numero': 2,
-            'anio': 2009,
+            'volumen': 7,
+            'numero': 14,
+            'anio': 2015,
             'mes_inicial': 2,
             'mes_final': 2,
-            'parte': 'parte',
+            'parte': 'P57-73',
             'fecha_creacion': datetime.now(),
             'fecha_actualizacion': datetime.now()
         }

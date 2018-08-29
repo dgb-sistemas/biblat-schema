@@ -37,42 +37,32 @@ class TestInstitutionModel(BaseTestCase):
 
     def _crea_pais(self):
         _id = self.generate_uuid_32_string()
-        i18nfield_nombre = self._crea_I18NField()
-        region = self._crea_I18NField_region()
-        subregion = self._crea_I18NField_subregion()
 
         pais_data = {
             '_id': _id,
-            'nombre': i18nfield_nombre,
-            'alpha2': 'MX',
-            'alpha3': 'MEX',
-            'codigo_pais': '484',
-            'iso_3166_2': 'Mexico',
-            'region': region,
-            'codigo_region': '123',
-            'codigo_sub_region': '123',
-            'region_intermedia': '123'
-
-        }
-
-    def _crea_pais(self):
-        _id = self.generate_uuid_32_string()
-        i18nfield_nombre = self._crea_I18NField()
-        region = self._crea_I18NField_region()
-        subregion = self._crea_I18NField_subregion()
-
-        pais_data = {
-            '_id': _id,
-            'nombre': i18nfield_nombre,
-            'alpha2': 'MX',
-            'alpha3': 'MEX',
-            'codigo_pais': '484',
-            'iso_3166_2': 'Mexico',
-            'region': region,
-            'codigo_region': '123',
-            'codigo_sub_region': '123',
-            'region_intermedia': '123'
-
+            "nombre": {
+              "es": "",
+              "en": "Mexico"
+            },
+            "alpha-2": "MX",
+            "alpha-3": "MEX",
+            "codigo_pais": "484",
+            "iso_3166-2": "ISO 3166-2:MX",
+            "region": {
+              "es": "",
+              "en": "Americas"
+            },
+            "sub-region": {
+              "es": "",
+              "en": "Latin America and the Caribbean"
+            },
+            "intermediate_region": {
+              "es": "Centroamérica",
+              "en": "Central America"
+            },
+            "codigo_region": "019",
+            "codigo_sub_region": "419",
+            "region_intermedia": "013"
         }
 
     def test_solo_campos_requeridos(self):

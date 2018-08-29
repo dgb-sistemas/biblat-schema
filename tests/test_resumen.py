@@ -30,7 +30,22 @@ class TestSummaryModel(BaseTestCase):
 
         resumen_data = {
             'idioma': idioma,
-            'resumen': 'Resumen del documento '
+            'resumen': 'En este artículo el Método de Perturbación (PM) es '
+                       'empleado para obtener una solución aproximada para '
+                       'el problema de Troesch. Además describiremos el uso '
+                       'de la Transformada de Laplace y la Aproximación de '
+                       'Padé para trabajar con las series truncadas '
+                       'obtenidas por el Método de Perturbación, '
+                       'y así obtener soluciones aproximadas compactas. '
+                       'Finalmente se propone una tabla comparativa entre la '
+                       'solución propuesta y otras soluciones reportadas en '
+                       'la '
+                       'literatura: Método de Descomposición de Adomian, '
+                       'Método de Perturbación Homotópica, Método de '
+                       'Análisis Homotópico y la solución numérica exacta. '
+                       'Los resultados muestran que nuestra solución es la '
+                       'más exacta (Error Relativo Absoluto '
+                       'Promedio1.705648354x10-8).'
         }
 
         # Guardamos

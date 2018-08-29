@@ -9,8 +9,8 @@ class TestAuthorModel(BaseTestCase):
     def test_solo_campos_requeridos(self):
         # Datos
         autor_data = {
-            'nombre': 'Montalvo Espinoza, J.L.',
-            'correo_electronico': 'sandokan55@gmail.com ',
+            'nombre': 'Vázquez Leal, H.',
+            'correo_electronico': 'hvazquez@uv.mx',
             'referencia': 1
 
         }

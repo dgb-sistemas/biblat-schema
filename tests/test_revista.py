@@ -13,8 +13,8 @@ class TestJournalModel(BaseTestCase):
         disciplina_data = {
             '_id': disciplina_id,
             'nombre': {
-                'es': u'Antropología',
-                'en': 'Anthropology'
+                'es': u'Multidisciplinaria',
+                'en': 'Multidisciplinary'
             }
         }
         disciplina_doc = DisciplinaRevista(**disciplina_data)
@@ -55,15 +55,42 @@ class TestJournalModel(BaseTestCase):
         disciplina_doc = self._crear_disciplina_revista_prueba()
 
         # País
-        pais_doc = self._crear_pais_prueba()
+        pais_doc = Pais(**{
+            '_id': 'MX',
+            'nombre': {
+                'es': u'México',
+                'en': 'Mexico'
+            },
+            'alpha2': 'MX',
+            'alpha3': 'MEX',
+            'codigo_pais': '484',
+            'iso_3166_2': 'ISO 3166-2:MX',
+            'region': {
+                'es': 'América',
+                'en': 'Americas'
+            },
+            'sub_region': {
+                'es': 'América Latina y el Caribe',
+                'en': 'Latin America and the Caribbean'
+            },
+            'intermediate_region': {
+                'es': 'Centroamérica',
+                'en': 'Central America'
+            },
+            'codigo_region': '019',
+            'codigo_sub_region': '419',
+            'region_intermedia': '013'
+        })
 
         # Datos
         revista_id = self.generate_uuid_32_string()
         revista_data = {
             '_id': revista_id,
-            'base_datos': 'CLA01',
-            'titulo': u'Estudios de cultura náhuatl',
-            'issn': '0071-1675',
+            'base_datos': 'PER01',
+            'titulo': u'Perturbation Method and Laplace-Padé Approximation '
+                      u'as a Novel Tool to Find Approximate Solutions for '
+                      u'Troeschs Problem',
+            'issn': '2007-0705',
             'pais': pais_doc,
             'disciplina': disciplina_doc,
             'fecha_creacion': datetime.now(),
