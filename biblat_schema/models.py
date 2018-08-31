@@ -35,8 +35,8 @@ class Revista(Document):
     titulo_abreviado:
     issn: identificador de revista
     issn_electronico: identificador de revista electronica
-    pais: Nombre del pais
-    disciplina: Nombre de la disciplina
+    pais: Identificador del pais
+    disciplina: Identificador de la disciplina
     licencia_cc: Licencia Creative Commons
     sherpa_romeo: Definicion Politicas open access
     idioma: Lista de idiomas de la revista
@@ -106,7 +106,7 @@ class PalabraClave(EmbeddedDocument):
 
 class Autor(EmbeddedDocument):
     """Esquema de autor
-    nombre: Nombre(s) del autor(es)
+    nombre: Nombre del autor
     correo_electronico: correo de contacto del autor
     referencia: valor entero que referencia a la institucion
     a la que pertenece el autor
@@ -131,7 +131,7 @@ class Institucion(EmbeddedDocument):
     institucion: Nombre de la institucion
     dependencia: Nombre de la dependencia
     ciudad_estado: Nombre de la ciudad o estado
-    pais: Nombre del pais
+    pais: Referencia al identificador del pais
     referencia: Numero entero para ser referenciado por el autor
     """
     institucion = StringField(max_length=256, required=True)
@@ -144,7 +144,8 @@ class Institucion(EmbeddedDocument):
 class UrlTextoCompleto(EmbeddedDocument):
     """Esquema de Url de texto completo
     url: URL del recurso para texto completo
-    descripcion: Descripcion del texto completo
+    descripcion: Descripcion del formato en Texto completo
+    Texto completo (Ver PDF) o Texto completo (Ver HTML)
     """
     url = URLField(required=True)
     descripcion = StringField(max_length=100, required=True)
@@ -181,7 +182,7 @@ class Documento(Document):
 class Historico(EmbeddedDocument):
     """Esquema histórico
     catalogador: Nombre del catalogador
-    nivel: Numero entero que define el nivel de acceso
+    nivel: Numero entero que define el nivel de acceso de ALEPH
     """
     catalogador = StringField(max_length=100, required=True)
     nivel = IntField(required=True)

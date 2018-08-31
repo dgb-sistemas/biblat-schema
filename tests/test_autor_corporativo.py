@@ -1,11 +1,11 @@
 # coding: utf-8
 from biblat_schema.models import AutorCorporativo
 from .base import BaseTestCase
-from biblat_schema.catalogs import Pais, I18NField
+from biblat_schema.catalogs import Pais
 
 
 class TestCorporativeAuthorModel(BaseTestCase):
-    model_class_to_delete = [AutorCorporativo, I18NField, Pais]
+    model_class_to_delete = [AutorCorporativo, Pais]
 
     def _crea_pais(self):
         _id = self.generate_uuid_32_string()
@@ -56,5 +56,30 @@ class TestCorporativeAuthorModel(BaseTestCase):
                          autor_corporativo_doc.institucion)
         self.assertEqual(autor_corporativo_data['dependencia'],
                          autor_corporativo_doc.dependencia)
+        # Desglose de pais
         self.assertEqual(autor_corporativo_data['pais'],
                          autor_corporativo_doc.pais)
+        self.assertEqual(autor_corporativo_data['pais']._id,
+                         autor_corporativo_doc.pais['_id'])
+        self.assertEqual(autor_corporativo_data['pais'].nombre,
+                         autor_corporativo_doc.pais['nombre'])
+        self.assertEqual(autor_corporativo_data['pais'].alpha2,
+                         autor_corporativo_doc.pais['alpha2'])
+        self.assertEqual(autor_corporativo_data['pais'].alpha3,
+                         autor_corporativo_doc.pais['alpha3'])
+        self.assertEqual(autor_corporativo_data['pais'].codigo_pais,
+                         autor_corporativo_doc.pais['codigo_pais'])
+        self.assertEqual(autor_corporativo_data['pais'].iso_3166_2,
+                         autor_corporativo_doc.pais['iso_3166_2'])
+        self.assertEqual(autor_corporativo_data['pais'].region,
+                         autor_corporativo_doc.pais['region'])
+        self.assertEqual(autor_corporativo_data['pais'].sub_region,
+                         autor_corporativo_doc.pais['sub_region'])
+        self.assertEqual(autor_corporativo_data['pais'].intermediate_region,
+                         autor_corporativo_doc.pais['intermediate_region'])
+        self.assertEqual(autor_corporativo_data['pais'].codigo_region,
+                         autor_corporativo_doc.pais['codigo_region'])
+        self.assertEqual(autor_corporativo_data['pais'].codigo_sub_region,
+                         autor_corporativo_doc.pais['codigo_sub_region'])
+        self.assertEqual(autor_corporativo_data['pais'].region_intermedia,
+                         autor_corporativo_doc.pais['region_intermedia'])

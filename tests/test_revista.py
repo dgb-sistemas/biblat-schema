@@ -87,9 +87,7 @@ class TestJournalModel(BaseTestCase):
         revista_data = {
             '_id': revista_id,
             'base_datos': 'PER01',
-            'titulo': u'Perturbation Method and Laplace-Padé Approximation '
-                      u'as a Novel Tool to Find Approximate Solutions for '
-                      u'Troeschs Problem',
+            'titulo': u'Estudios de cultura náhuatl',
             'issn': '2007-0705',
             'pais': pais_doc,
             'disciplina': disciplina_doc,

@@ -1,39 +1,10 @@
 # coding: utf-8
 from biblat_schema.models import Institucion, Pais
-from biblat_schema.catalogs import I18NField
 from .base import BaseTestCase
 
 
 class TestInstitutionModel(BaseTestCase):
-    model_class_to_delete = [Institucion, Pais, I18NField]
-
-    def _crea_I18NField(self):
-        I18NField_data = {
-            'es': 'México',
-            'en': 'Mexico'
-        }
-        return I18NField(**I18NField_data)
-
-    def _crea_I18NField_region(self):
-        I18NField_data = {
-            'es': 'Norte',
-            'en': 'North'
-        }
-        return I18NField(**I18NField_data)
-
-    def _crea_I18NField_subregion(self):
-        I18NField_data = {
-            'es': 'Norte',
-            'en': 'North'
-        }
-        return I18NField(**I18NField_data)
-
-    def _crea_I18NField_intermediateregion(self):
-        I18NField_data = {
-            'es': 'Norte',
-            'en': 'North'
-        }
-        return I18NField(**I18NField_data)
+    model_class_to_delete = [Institucion, Pais]
 
     def _crea_pais(self):
         _id = self.generate_uuid_32_string()
@@ -44,15 +15,15 @@ class TestInstitutionModel(BaseTestCase):
               "es": "",
               "en": "Mexico"
             },
-            "alpha-2": "MX",
-            "alpha-3": "MEX",
+            "alpha2": "MX",
+            "alpha3": "MEX",
             "codigo_pais": "484",
-            "iso_3166-2": "ISO 3166-2:MX",
+            "iso_3166_2": "ISO 3166-2:MX",
             "region": {
               "es": "",
               "en": "Americas"
             },
-            "sub-region": {
+            "sub_region": {
               "es": "",
               "en": "Latin America and the Caribbean"
             },
@@ -64,6 +35,7 @@ class TestInstitutionModel(BaseTestCase):
             "codigo_sub_region": "419",
             "region_intermedia": "013"
         }
+        return Pais(**pais_data)
 
     def test_solo_campos_requeridos(self):
         # Datos
@@ -86,7 +58,33 @@ class TestInstitutionModel(BaseTestCase):
                          institucion_doc.dependencia)
         self.assertEqual(institucion_data['ciudad_estado'],
                          institucion_doc.ciudad_estado)
+        # Desglose pais
         self.assertEqual(institucion_data['pais'],
                          institucion_doc.pais)
+        self.assertEqual(institucion_data['pais']._id,
+                         institucion_doc.pais._id)
+        self.assertEqual(institucion_data['pais'].nombre,
+                         institucion_doc.pais.nombre)
+        self.assertEqual(institucion_data['pais'].alpha2,
+                         institucion_doc.pais.alpha2)
+        self.assertEqual(institucion_data['pais'].alpha3,
+                         institucion_doc.pais.alpha3)
+        self.assertEqual(institucion_data['pais'].codigo_pais,
+                         institucion_doc.pais.codigo_pais)
+        self.assertEqual(institucion_data['pais'].iso_3166_2,
+                         institucion_doc.pais.iso_3166_2)
+        self.assertEqual(institucion_data['pais'].region,
+                         institucion_doc.pais.region)
+        self.assertEqual(institucion_data['pais'].sub_region,
+                         institucion_doc.pais.sub_region)
+        self.assertEqual(institucion_data['pais'].intermediate_region,
+                         institucion_doc.pais.intermediate_region)
+        self.assertEqual(institucion_data['pais'].codigo_region,
+                         institucion_doc.pais.codigo_region)
+        self.assertEqual(institucion_data['pais'].codigo_sub_region,
+                         institucion_doc.pais.codigo_sub_region)
+        self.assertEqual(institucion_data['pais'].region_intermedia,
+                         institucion_doc.pais.region_intermedia)
+
         self.assertEqual(institucion_data['referencia'],
                          institucion_doc.referencia)

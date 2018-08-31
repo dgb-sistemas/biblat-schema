@@ -37,3 +37,13 @@ class TestCatalogationHistoricalModel(BaseTestCase):
                          historial_catalogacion_doc.documento)
         self.assertEqual(historial_catalogacion_data['catalogacion'],
                          historial_catalogacion_doc.catalogacion)
+
+        self.assertEqual(historial_catalogacion_data['catalogacion'][
+                             0].catalogador,
+                         historial_catalogacion_doc.catalogacion[
+                             0].catalogador)
+        self.assertEqual(historial_catalogacion_data['catalogacion'][0].nivel,
+                         historial_catalogacion_doc.catalogacion[0].nivel)
+        self.assertEqual(historial_catalogacion_data['catalogacion'][
+                             0].fecha_hora,
+                         historial_catalogacion_doc.catalogacion[0].fecha_hora)

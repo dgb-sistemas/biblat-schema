@@ -17,12 +17,12 @@ class I18NField(EmbeddedDocument):
 
 class Pais(Document):
     """Esquema de catalogo pais
-    alpha2: codigo de pais en dos caracteres
+    alpha2: codigo de pais en dos letras designado para representar la
+    mayoria de los lenguajes en el mundo
     alpha: codigo de pais en tres caracteres
     codigo_pais: Codigo numerico de pais
-    iso_3166-2: de identificación de las principales subdivisiones (por
-    ejemplo, provincias o estados) de todos los países codificados en ISO
-    3166-1
+    iso_3166-2: Codigo de 3 letras que brinda mas combinaciones, pudiendo
+    cubrir mas lenguajes
     """
     _id = StringField(max_length=2, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
