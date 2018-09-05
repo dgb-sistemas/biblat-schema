@@ -1,4 +1,5 @@
 # coding: utf-8
+
 from biblat_schema.models import Autor
 from .base import BaseTestCase
 
@@ -17,7 +18,7 @@ class TestAuthorModel(BaseTestCase):
 
         # Guardamos
         autor_doc = Autor(**autor_data)
-
+        autor_doc.validate()
         # Comprobamos
         self.assertEqual(autor_data['nombre'], autor_doc.nombre)
         self.assertEqual(autor_data['correo_electronico'],

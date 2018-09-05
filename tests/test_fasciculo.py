@@ -1,5 +1,6 @@
 # coding: utf-8
 from datetime import datetime
+
 from biblat_schema.models import Fasciculo, Revista, Pais
 from biblat_schema.catalogs import Disciplina
 from .base import BaseTestCase
@@ -94,52 +95,52 @@ class TestFascicleModel(BaseTestCase):
         self.assertEqual(_id, fasciculo_doc._id)
 
         # Desglose revista
-        self.assertEqual(fasciculo_data['revista'], fasciculo_doc.revista)
-        self.assertEqual(fasciculo_data['revista']._id, fasciculo_doc.revista[
+        self.assertEqual(revista_doc, fasciculo_doc.revista)
+        self.assertEqual(revista_doc._id, fasciculo_doc.revista[
             '_id'])
-        self.assertEqual(fasciculo_data['revista'].base_datos,
+        self.assertEqual(revista_doc.base_datos,
                          fasciculo_doc.revista['base_datos'])
-        self.assertEqual(fasciculo_data['revista'].titulo,
+        self.assertEqual(revista_doc.titulo,
                          fasciculo_doc.revista['titulo'])
-        self.assertEqual(fasciculo_data['revista'].issn,
+        self.assertEqual(revista_doc.issn,
                          fasciculo_doc.revista['issn'])
 
         # Desglose pais
-        self.assertEqual(fasciculo_data['revista'].pais,
+        self.assertEqual(revista_doc.pais,
                          fasciculo_doc.revista['pais'])
-        self.assertEqual(fasciculo_data['revista'].pais._id,
+        self.assertEqual(revista_doc.pais._id,
                          fasciculo_doc.revista['pais']._id)
-        self.assertEqual(fasciculo_data['revista'].pais.nombre,
+        self.assertEqual(revista_doc.pais.nombre,
                          fasciculo_doc.revista['pais'].nombre)
-        self.assertEqual(fasciculo_data['revista'].pais.alpha2,
+        self.assertEqual(revista_doc.pais.alpha2,
                          fasciculo_doc.revista['pais'].alpha2)
-        self.assertEqual(fasciculo_data['revista'].pais.alpha3,
+        self.assertEqual(revista_doc.pais.alpha3,
                          fasciculo_doc.revista['pais'].alpha3)
-        self.assertEqual(fasciculo_data['revista'].pais.codigo_pais,
+        self.assertEqual(revista_doc.pais.codigo_pais,
                          fasciculo_doc.revista['pais'].codigo_pais)
-        self.assertEqual(fasciculo_data['revista'].pais.iso_3166_2,
+        self.assertEqual(revista_doc.pais.iso_3166_2,
                          fasciculo_doc.revista['pais'].iso_3166_2)
-        self.assertEqual(fasciculo_data['revista'].pais.region,
+        self.assertEqual(revista_doc.pais.region,
                          fasciculo_doc.revista['pais'].region)
-        self.assertEqual(fasciculo_data['revista'].pais.sub_region,
+        self.assertEqual(revista_doc.pais.sub_region,
                          fasciculo_doc.revista['pais'].sub_region)
-        self.assertEqual(fasciculo_data['revista'].pais.intermediate_region,
+        self.assertEqual(revista_doc.pais.intermediate_region,
                          fasciculo_doc.revista['pais'].intermediate_region)
-        self.assertEqual(fasciculo_data['revista'].pais.codigo_region,
+        self.assertEqual(revista_doc.pais.codigo_region,
                          fasciculo_doc.revista['pais'].codigo_region)
-        self.assertEqual(fasciculo_data['revista'].pais.codigo_sub_region,
+        self.assertEqual(revista_doc.pais.codigo_sub_region,
                          fasciculo_doc.revista['pais'].codigo_sub_region)
-        self.assertEqual(fasciculo_data['revista'].pais.region_intermedia,
+        self.assertEqual(revista_doc.pais.region_intermedia,
                          fasciculo_doc.revista['pais'].region_intermedia)
         # Desglose disciplina
-        self.assertEqual(fasciculo_data['revista'].disciplina._id,
+        self.assertEqual(revista_doc.disciplina._id,
                          fasciculo_doc.revista['disciplina']._id)
-        self.assertEqual(fasciculo_data['revista'].disciplina.nombre,
+        self.assertEqual(revista_doc.disciplina.nombre,
                          fasciculo_doc.revista['disciplina'].nombre)
 
-        self.assertEqual(fasciculo_data['revista'].fecha_creacion,
+        self.assertEqual(revista_doc.fecha_creacion,
                          fasciculo_doc.revista['fecha_creacion'])
-        self.assertEqual(fasciculo_data['revista'].fecha_actualizacion,
+        self.assertEqual(revista_doc.fecha_actualizacion,
                          fasciculo_doc.revista['fecha_actualizacion'])
 
         self.assertEqual(fasciculo_data['volumen'], fasciculo_doc.volumen)

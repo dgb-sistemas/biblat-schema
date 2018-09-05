@@ -16,7 +16,7 @@ class TestURLFullTextModel(BaseTestCase):
 
         # Guardamos
         url_texto_completo_doc = UrlTextoCompleto(**url_texto_completo_data)
-
+        url_texto_completo_doc.validate()
         # Comprobamos
         self.assertEqual(url_texto_completo_data['url'],
                          url_texto_completo_doc.url)

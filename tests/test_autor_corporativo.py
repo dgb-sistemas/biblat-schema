@@ -1,7 +1,8 @@
 # coding: utf-8
+
 from biblat_schema.models import AutorCorporativo
-from .base import BaseTestCase
 from biblat_schema.catalogs import Pais
+from .base import BaseTestCase
 
 
 class TestCorporativeAuthorModel(BaseTestCase):
@@ -50,6 +51,7 @@ class TestCorporativeAuthorModel(BaseTestCase):
 
         # Guardamos
         autor_corporativo_doc = AutorCorporativo(**autor_corporativo_data)
+        autor_corporativo_doc.validate()
 
         # Comprobamos
         self.assertEqual(autor_corporativo_data['institucion'],

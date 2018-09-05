@@ -16,12 +16,12 @@ class I18NField(EmbeddedDocument):
 
 
 class Pais(Document):
-    """Esquema de catalogo pais
-    alpha2: codigo de pais en dos letras designado para representar la
-    mayoria de los lenguajes en el mundo
-    alpha: codigo de pais en tres caracteres
-    codigo_pais: Codigo numerico de pais
-    iso_3166-2: Codigo de 3 letras que brinda mas combinaciones, pudiendo
+    """Esquema de catálogo país
+    alpha2: código de país en dos letras designado para representar la
+    mayoría de los lenguajes en el mundo
+    alpha: código de país en tres caracteres
+    codigo_pais: Código numérico de país
+    iso_3166-2: Código de 3 letras que brinda mas combinaciones, pudiendo
     cubrir mas lenguajes
     """
     _id = StringField(max_length=2, primary_key=True, required=True)
@@ -39,7 +39,7 @@ class Pais(Document):
 
 
 class Idioma(Document):
-    """Esquema de catalogo idioma
+    """Esquema de catálogo idioma
     iso_639_1:códigos de dos letras usados para identificar los idiomas
     principales del mundo
     iso_639_2:códigos de tres letras usados para identificar los idiomas
@@ -52,47 +52,47 @@ class Idioma(Document):
 
 
 class TipoDocumento(Document):
-    """Esquema de catalogo tipo documento"""
+    """Esquema de catálogo tipo documento"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
     descripcion = EmbeddedDocumentField(I18NField)
 
 
 class EnfoqueDocumento(Document):
-    """Esquema de catalogo enfoque documento"""
+    """Esquema de catálogo enfoque documento"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
     descripcion = EmbeddedDocumentField(I18NField)
 
 
 class Disciplina(Document):
-    """Esquema de catalogo disciplina"""
+    """Esquema de catálogo disciplina"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
 
 
 class SubDisciplina(Document):
-    """Esquema de catalogo subdisciplina"""
+    """Esquema de catálogo subdisciplina"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     disciplina = ReferenceField(Disciplina, required=True)
     nombre = EmbeddedDocumentField(I18NField)
 
 
 class NombreGeografico(Document):
-    """Esquema de catalogo nombre geografico"""
+    """Esquema de catálogo nombre geográfico"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
 
 
 class DisciplinaRevista(Document):
-    """Esquema de catalogo disciplina revista"""
+    """Esquema de catálogo disciplina revista"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     base = ListField(StringField(max_length=10, required=True))
     nombre = EmbeddedDocumentField(I18NField)
 
 
 class LicenciaCC(Document):
-    """Esquema de catalogo licencia
+    """Esquema de catálogo licencia
     tipo: tipo de licencia creative commons
     url: url del legal code de la licencia
     """
@@ -102,7 +102,7 @@ class LicenciaCC(Document):
 
 
 class SherpaRomeo(Document):
-    """Esquema de catalogo sherpa romeo
+    """Esquema de catálogo sherpa romeo
     politica: especificacion de la politica utilizada
     codigo: codigo hexagecimal utilizado por el color
     """

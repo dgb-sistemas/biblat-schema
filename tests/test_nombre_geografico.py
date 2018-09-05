@@ -16,13 +16,12 @@ class TestGeographicNameModel(BaseTestCase):
         nombre_geografico_data = {
             '_id': _id,
             'nombre': nombre
-
         }
 
         # Guardamos
         nombre_geografico_doc = NombreGeografico(
             **nombre_geografico_data)
-
+        nombre_geografico_doc.save()
         # Comprobamos
         self.assertEqual(nombre_geografico_data['_id'],
                          nombre_geografico_doc._id)

@@ -46,6 +46,7 @@ class TestSummaryModel(BaseTestCase):
 
         # Guardamos
         resumen_doc = Resumen(**resumen_data)
+        resumen_doc.validate()
 
         self.assertEqual(resumen_data['idioma']._id, resumen_doc.idioma._id)
         self.assertEqual(resumen_data['idioma'].iso_639_1,

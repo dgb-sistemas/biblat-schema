@@ -1,5 +1,6 @@
 # coding: utf-8
 from datetime import datetime
+
 from biblat_schema.models import Historico
 from .base import BaseTestCase
 
@@ -19,7 +20,7 @@ class TestHistoricalModel(BaseTestCase):
 
         # Guardamos
         historico_doc = Historico(**historico_data)
-
+        historico_doc.validate()
         # Comprobamos
         self.assertEqual(historico_data['catalogador'],
                          historico_doc.catalogador)

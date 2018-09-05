@@ -31,11 +31,11 @@ from .catalogs import (
 class Revista(Document):
     """Esquema de Revista
     base_datos: Nombre de la base de datos(CLA01 o PER01)
-    titulo: Titulo de la revista
+    titulo: Título de la revista
     titulo_abreviado:
     issn: identificador de revista
-    issn_electronico: identificador de revista electronica
-    pais: Identificador del pais
+    issn_electronico: identificador de revista electrónica
+    pais: Identificador del país
     disciplina: Identificador de la disciplina
     licencia_cc: Licencia Creative Commons
     sherpa_romeo: Definicion Politicas open access
@@ -65,12 +65,12 @@ class Revista(Document):
 class Fasciculo(Document):
     """Esquema de fascículo
     revista:Objeto referenciado de tipo revista
-    volumen: volumen del fasciculo
-    numero: numero del fasciculo
-    año: año del fasciculo
+    volumen: volúmen del fascículo
+    numero: numero del fascículo
+    año: año del fascículo
     mes_inicial:
     mes_final:
-    parte: parte del fasciculo
+    parte: parte del fascículo
     fecha_creacion:
     fecha_actualizacion:
     """
@@ -87,7 +87,7 @@ class Fasciculo(Document):
 
 
 class Resumen(EmbeddedDocument):
-    """Esquema de resumen
+    """Esquema de resúmen
     idioma: Objeto referenciado de idioma
     resumen:
     """
@@ -97,8 +97,8 @@ class Resumen(EmbeddedDocument):
 
 class PalabraClave(EmbeddedDocument):
     """Esquema de palabra clave
-    idioma: Objedo referenciado de idioma
-    palabra_clave: definicion de la palabra clave
+    idioma: Objeto referenciado de idioma
+    palabra_clave: definición de la palabra clave
     """
     idioma = ReferenceField(Idioma, required=True)
     palabra_clave = StringField(max_length=100, required=True)
@@ -108,7 +108,7 @@ class Autor(EmbeddedDocument):
     """Esquema de autor
     nombre: Nombre del autor
     correo_electronico: correo de contacto del autor
-    referencia: valor entero que referencia a la institucion
+    referencia: valor entero que referencia a la institución
     a la que pertenece el autor
     """
     nombre = StringField(max_length=100, required=True)
@@ -118,9 +118,9 @@ class Autor(EmbeddedDocument):
 
 class AutorCorporativo(EmbeddedDocument):
     """Esquema de autor corporativo
-    institucion: nombre de la institucion a la que pertenece el autor
+    institucion: nombre de la institución a la que pertenece el autor
     dependencia: nombre de la dependencia a la que pertenece el autor
-    pais: nombre del pais de la institucion a la que pertenece el autor"""
+    pais: nombre del país de la institución a la que pertenece el autor"""
     institucion = StringField(max_length=100, required=True)
     dependencia = StringField(max_length=100)
     pais = ReferenceField(Pais)
@@ -128,11 +128,11 @@ class AutorCorporativo(EmbeddedDocument):
 
 class Institucion(EmbeddedDocument):
     """Esquema de institución
-    institucion: Nombre de la institucion
+    institucion: Nombre de la institución
     dependencia: Nombre de la dependencia
     ciudad_estado: Nombre de la ciudad o estado
-    pais: Referencia al identificador del pais
-    referencia: Numero entero para ser referenciado por el autor
+    pais: Referencia al identificador del país
+    referencia: Número entero para ser referenciado por el autor
     """
     institucion = StringField(max_length=256, required=True)
     dependencia = StringField(max_length=256)
@@ -144,7 +144,7 @@ class Institucion(EmbeddedDocument):
 class UrlTextoCompleto(EmbeddedDocument):
     """Esquema de Url de texto completo
     url: URL del recurso para texto completo
-    descripcion: Descripcion del formato en Texto completo
+    descripcion: Descripción del formato en Texto completo
     Texto completo (Ver PDF) o Texto completo (Ver HTML)
     """
     url = URLField(required=True)
@@ -182,7 +182,7 @@ class Documento(Document):
 class Historico(EmbeddedDocument):
     """Esquema histórico
     catalogador: Nombre del catalogador
-    nivel: Numero entero que define el nivel de acceso de ALEPH
+    nivel: Número entero que define el nivel de acceso de ALEPH
     """
     catalogador = StringField(max_length=100, required=True)
     nivel = IntField(required=True)

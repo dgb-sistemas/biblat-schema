@@ -50,7 +50,7 @@ class TestInstitutionModel(BaseTestCase):
 
         # Guardamos
         institucion_doc = Institucion(**institucion_data)
-
+        institucion_doc.validate()
         # Comprobamos
         self.assertEqual(institucion_data['institucion'],
                          institucion_doc.institucion)
@@ -59,31 +59,31 @@ class TestInstitutionModel(BaseTestCase):
         self.assertEqual(institucion_data['ciudad_estado'],
                          institucion_doc.ciudad_estado)
         # Desglose pais
-        self.assertEqual(institucion_data['pais'],
+        self.assertEqual(pais,
                          institucion_doc.pais)
-        self.assertEqual(institucion_data['pais']._id,
+        self.assertEqual(pais._id,
                          institucion_doc.pais._id)
-        self.assertEqual(institucion_data['pais'].nombre,
+        self.assertEqual(pais.nombre,
                          institucion_doc.pais.nombre)
-        self.assertEqual(institucion_data['pais'].alpha2,
+        self.assertEqual(pais.alpha2,
                          institucion_doc.pais.alpha2)
-        self.assertEqual(institucion_data['pais'].alpha3,
+        self.assertEqual(pais.alpha3,
                          institucion_doc.pais.alpha3)
-        self.assertEqual(institucion_data['pais'].codigo_pais,
+        self.assertEqual(pais.codigo_pais,
                          institucion_doc.pais.codigo_pais)
-        self.assertEqual(institucion_data['pais'].iso_3166_2,
+        self.assertEqual(pais.iso_3166_2,
                          institucion_doc.pais.iso_3166_2)
-        self.assertEqual(institucion_data['pais'].region,
+        self.assertEqual(pais.region,
                          institucion_doc.pais.region)
-        self.assertEqual(institucion_data['pais'].sub_region,
+        self.assertEqual(pais.sub_region,
                          institucion_doc.pais.sub_region)
-        self.assertEqual(institucion_data['pais'].intermediate_region,
+        self.assertEqual(pais.intermediate_region,
                          institucion_doc.pais.intermediate_region)
-        self.assertEqual(institucion_data['pais'].codigo_region,
+        self.assertEqual(pais.codigo_region,
                          institucion_doc.pais.codigo_region)
-        self.assertEqual(institucion_data['pais'].codigo_sub_region,
+        self.assertEqual(pais.codigo_sub_region,
                          institucion_doc.pais.codigo_sub_region)
-        self.assertEqual(institucion_data['pais'].region_intermedia,
+        self.assertEqual(pais.region_intermedia,
                          institucion_doc.pais.region_intermedia)
 
         self.assertEqual(institucion_data['referencia'],

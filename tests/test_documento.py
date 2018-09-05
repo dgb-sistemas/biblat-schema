@@ -1,5 +1,7 @@
 # coding: utf-8
 from datetime import datetime
+
+from biblat_schema.marc import MarcDocumentField
 from biblat_schema.models import (
     Documento,
     Revista,
@@ -17,7 +19,6 @@ from biblat_schema.models import (
 )
 from biblat_schema.catalogs import I18NField, Disciplina, Pais, Idioma
 from .base import BaseTestCase
-from biblat_schema.marc import MarcDocumentField
 
 
 class TestDocumentModel(BaseTestCase):
@@ -181,9 +182,10 @@ class TestDocumentModel(BaseTestCase):
 
     def test_solo_campos_requeridos(self):
         # Datos
-        revista = self._crea_revista()
+
         fasciculo = self._crea_fasciculo()
-        pais = self._crea_pais()
+        revista = fasciculo.revista
+        pais = revista.pais
         idioma = self._crea_idioma()
         autor = Autor(**{
             'nombre': 'Vázquez Leal, H.',
@@ -233,12 +235,12 @@ class TestDocumentModel(BaseTestCase):
         nombres_geograficos = self._crea_descriptor_geografico()
         url_texto_completo = UrlTextoCompleto(**{
             'url': 'http://132.248.9.34/hevila/e-BIBLAT/PERIODICA/per7857.pdf',
-            'descripcion': 'Estudios de cultura nahuatl'
+            'descripcion': 'Texto completo (Ver PDF)'
         })
         marc21 = self._crea_marc_document_field()
         tipo_documento = self._crea_tipo_documento()
         enfoque_documento = self._crea_enfoque_documento()
-        disciplina = self._crea_disciplina()
+        disciplina = revista.disciplina
 
         _id = self.generate_uuid_32_string()
 
@@ -251,7 +253,7 @@ class TestDocumentModel(BaseTestCase):
                                 'Phyllostomidae, Desmodontinae): new records '
                                 'for southern Amazonia',
             'doi': '10.1145/1067268.1067287',
-            'paginacion': 'paginacion',
+            'paginacion': 'P302-309',
             'autor': [autor],
             'autor_corporativo': [autor_corporativo],
             'institucion': [institucion],
@@ -278,76 +280,76 @@ class TestDocumentModel(BaseTestCase):
         self.assertEqual(documento_data['_id'],
                          documento_doc._id)
         # DEsglose revista
-        self.assertEqual(documento_data['revista'],
+        self.assertEqual(revista,
                          documento_doc.revista)
-        self.assertEqual(documento_data['revista']._id,
+        self.assertEqual(revista._id,
                          documento_doc.revista._id)
-        self.assertEqual(documento_data['revista'].base_datos,
+        self.assertEqual(revista.base_datos,
                          documento_doc.revista.base_datos)
-        self.assertEqual(documento_data['revista'].titulo,
+        self.assertEqual(revista.titulo,
                          documento_doc.revista.titulo)
-        self.assertEqual(documento_data['revista'].issn,
+        self.assertEqual(revista.issn,
                          documento_doc.revista.issn)
-        self.assertEqual(documento_data['revista'].fecha_creacion,
+        self.assertEqual(revista.fecha_creacion,
                          documento_doc.revista.fecha_creacion)
-        self.assertEqual(documento_data['revista'].fecha_actualizacion,
+        self.assertEqual(revista.fecha_actualizacion,
                          documento_doc.revista.fecha_actualizacion)
 
         # Desglose pais
-        self.assertEqual(documento_data['revista'].pais,
+        self.assertEqual(pais,
                          documento_doc.revista.pais)
-        self.assertEqual(documento_data['revista'].pais._id,
+        self.assertEqual(pais._id,
                          documento_doc.revista.pais._id)
-        self.assertEqual(documento_data['revista'].pais.nombre,
+        self.assertEqual(pais.nombre,
                          documento_doc.revista.pais.nombre)
-        self.assertEqual(documento_data['revista'].pais.alpha2,
+        self.assertEqual(pais.alpha2,
                          documento_doc.revista.pais.alpha2)
-        self.assertEqual(documento_data['revista'].pais.alpha3,
+        self.assertEqual(pais.alpha3,
                          documento_doc.revista.pais.alpha3)
-        self.assertEqual(documento_data['revista'].pais.codigo_pais,
+        self.assertEqual(pais.codigo_pais,
                          documento_doc.revista.pais.codigo_pais)
-        self.assertEqual(documento_data['revista'].pais.iso_3166_2,
+        self.assertEqual(pais.iso_3166_2,
                          documento_doc.revista.pais.iso_3166_2)
-        self.assertEqual(documento_data['revista'].pais.region,
+        self.assertEqual(pais.region,
                          documento_doc.revista.pais.region)
-        self.assertEqual(documento_data['revista'].pais.sub_region,
+        self.assertEqual(pais.sub_region,
                          documento_doc.revista.pais.sub_region)
-        self.assertEqual(documento_data['revista'].pais.intermediate_region,
+        self.assertEqual(pais.intermediate_region,
                          documento_doc.revista.pais.intermediate_region)
-        self.assertEqual(documento_data['revista'].pais.codigo_region,
+        self.assertEqual(pais.codigo_region,
                          documento_doc.revista.pais.codigo_region)
-        self.assertEqual(documento_data['revista'].pais.codigo_sub_region,
+        self.assertEqual(pais.codigo_sub_region,
                          documento_doc.revista.pais.codigo_sub_region)
-        self.assertEqual(documento_data['revista'].pais.region_intermedia,
+        self.assertEqual(pais.region_intermedia,
                          documento_doc.revista.pais.region_intermedia)
         # desglose disciplina
-        self.assertEqual(documento_data['revista'].disciplina,
+        self.assertEqual(disciplina,
                          documento_doc.revista.disciplina)
-        self.assertEqual(documento_data['revista'].disciplina._id,
+        self.assertEqual(disciplina._id,
                          documento_doc.revista.disciplina._id)
-        self.assertEqual(documento_data['revista'].disciplina.nombre,
+        self.assertEqual(disciplina.nombre,
                          documento_doc.revista.disciplina.nombre)
 
         # Desglose fasciculo
-        self.assertEqual(documento_data['fasciculo']._id,
+        self.assertEqual(fasciculo._id,
                          documento_doc.fasciculo._id)
-        self.assertEqual(documento_data['fasciculo'].revista,
+        self.assertEqual(fasciculo.revista,
                          documento_doc.fasciculo.revista)
-        self.assertEqual(documento_data['fasciculo'].volumen,
+        self.assertEqual(fasciculo.volumen,
                          documento_doc.fasciculo.volumen)
-        self.assertEqual(documento_data['fasciculo'].numero,
+        self.assertEqual(fasciculo.numero,
                          documento_doc.fasciculo.numero)
-        self.assertEqual(documento_data['fasciculo'].anio,
+        self.assertEqual(fasciculo.anio,
                          documento_doc.fasciculo.anio)
-        self.assertEqual(documento_data['fasciculo'].mes_inicial,
+        self.assertEqual(fasciculo.mes_inicial,
                          documento_doc.fasciculo.mes_inicial)
-        self.assertEqual(documento_data['fasciculo'].mes_final,
+        self.assertEqual(fasciculo.mes_final,
                          documento_doc.fasciculo.mes_final)
-        self.assertEqual(documento_data['fasciculo'].parte,
+        self.assertEqual(fasciculo.parte,
                          documento_doc.fasciculo.parte)
-        self.assertEqual(documento_data['fasciculo'].fecha_creacion,
+        self.assertEqual(fasciculo.fecha_creacion,
                          documento_doc.fasciculo.fecha_creacion)
-        self.assertEqual(documento_data['fasciculo'].fecha_actualizacion,
+        self.assertEqual(fasciculo.fecha_actualizacion,
                          documento_doc.fasciculo.fecha_actualizacion)
 
         self.assertEqual(documento_data['titulo_documento'],
@@ -357,111 +359,111 @@ class TestDocumentModel(BaseTestCase):
         self.assertEqual(documento_data['paginacion'],
                          documento_doc.paginacion)
         # Desglose autor
-        self.assertEqual(documento_data['autor'],
-                         documento_doc.autor)
-        self.assertEqual(documento_data['autor'][0].nombre,
+        self.assertEqual(autor,
+                         documento_doc.autor[0])
+        self.assertEqual(autor.nombre,
                          documento_doc.autor[0].nombre)
-        self.assertEqual(documento_data['autor'][0].correo_electronico,
+        self.assertEqual(autor.correo_electronico,
                          documento_doc.autor[0].correo_electronico)
-        self.assertEqual(documento_data['autor'][0].referencia,
+        self.assertEqual(autor.referencia,
                          documento_doc.autor[0].referencia)
         # Desglose autor_corporativo
-        self.assertEqual(documento_data['autor_corporativo'],
-                         documento_doc.autor_corporativo)
-        self.assertEqual(documento_data['autor_corporativo'][0].institucion,
+        self.assertEqual(autor_corporativo,
+                         documento_doc.autor_corporativo[0])
+        self.assertEqual(autor_corporativo.institucion,
                          documento_doc.autor_corporativo[0].institucion)
-        self.assertEqual(documento_data['autor_corporativo'][0].dependencia,
+        self.assertEqual(autor_corporativo.dependencia,
                          documento_doc.autor_corporativo[0].dependencia)
         # Desglose Institucion
-        self.assertEqual(documento_data['institucion'],
-                         documento_doc.institucion)
-        self.assertEqual(documento_data['institucion'][0].institucion,
+        self.assertEqual(institucion,
+                         documento_doc.institucion[0])
+        self.assertEqual(institucion.institucion,
                          documento_doc.institucion[0].institucion)
-        self.assertEqual(documento_data['institucion'][0].dependencia,
+        self.assertEqual(institucion.dependencia,
                          documento_doc.institucion[0].dependencia)
-        self.assertEqual(documento_data['institucion'][0].ciudad_estado,
+        self.assertEqual(institucion.ciudad_estado,
                          documento_doc.institucion[0].ciudad_estado)
-        self.assertEqual(documento_data['institucion'][0].pais,
+        self.assertEqual(institucion.pais,
                          documento_doc.institucion[0].pais)
-        self.assertEqual(documento_data['institucion'][0].referencia,
+        self.assertEqual(institucion.referencia,
                          documento_doc.institucion[0].referencia)
 
         # Desglose resumen
-        self.assertEqual(documento_data['resumen'],
-                         documento_doc.resumen)
-        self.assertEqual(documento_data['resumen'][0].resumen,
+        self.assertEqual(resumen,
+                         documento_doc.resumen[0])
+        self.assertEqual(resumen.resumen,
                          documento_doc.resumen[0].resumen)
-        self.assertEqual(documento_data['resumen'][0].idioma,
+        self.assertEqual(resumen.idioma,
                          documento_doc.resumen[0].idioma)
 
-        self.assertEqual(documento_data['resumen'][0].idioma._id,
+        self.assertEqual(idioma._id,
                          documento_doc.resumen[0].idioma._id)
-        self.assertEqual(documento_data['resumen'][0].idioma.iso_639_1,
+        self.assertEqual(idioma.iso_639_1,
                          documento_doc.resumen[0].idioma.iso_639_1)
-        self.assertEqual(documento_data['resumen'][0].idioma.iso_639_2,
+        self.assertEqual(idioma.iso_639_2,
                          documento_doc.resumen[0].idioma.iso_639_2)
-        self.assertEqual(documento_data['resumen'][0].idioma.nombre,
+        self.assertEqual(idioma.nombre,
                          documento_doc.resumen[0].idioma.nombre)
 
-        self.assertEqual(documento_data['palabra_clave'],
-                         documento_doc.palabra_clave)
-        self.assertEqual(documento_data['palabra_clave'][0].idioma,
+        self.assertEqual(palabra_clave,
+                         documento_doc.palabra_clave[0])
+        self.assertEqual(palabra_clave.idioma,
                          documento_doc.palabra_clave[0].idioma)
-        self.assertEqual(documento_data['palabra_clave'][0].palabra_clave,
+        self.assertEqual(palabra_clave.palabra_clave,
                          documento_doc.palabra_clave[0].palabra_clave)
 
-        self.assertEqual(documento_data['tipo_documento'],
+        self.assertEqual(tipo_documento,
                          documento_doc.tipo_documento)
-        self.assertEqual(documento_data['tipo_documento']._id,
+        self.assertEqual(tipo_documento._id,
                          documento_doc.tipo_documento._id)
-        self.assertEqual(documento_data['tipo_documento'].nombre,
+        self.assertEqual(tipo_documento.nombre,
                          documento_doc.tipo_documento.nombre)
-        self.assertEqual(documento_data['tipo_documento'].descripcion,
+        self.assertEqual(tipo_documento.descripcion,
                          documento_doc.tipo_documento.descripcion)
 
-        self.assertEqual(documento_data['enfoque_documento'],
+        self.assertEqual(enfoque_documento,
                          documento_doc.enfoque_documento)
-        self.assertEqual(documento_data['enfoque_documento']._id,
+        self.assertEqual(enfoque_documento._id,
                          documento_doc.enfoque_documento._id)
-        self.assertEqual(documento_data['enfoque_documento'].nombre,
+        self.assertEqual(enfoque_documento.nombre,
                          documento_doc.enfoque_documento.nombre)
-        self.assertEqual(documento_data['enfoque_documento'].descripcion,
+        self.assertEqual(enfoque_documento.descripcion,
                          documento_doc.enfoque_documento.descripcion)
 
-        self.assertEqual(documento_data['disciplina'],
-                         documento_doc.disciplina)
-        self.assertEqual(documento_data['disciplina'][0]._id,
+        self.assertEqual(disciplina,
+                         documento_doc.disciplina[0])
+        self.assertEqual(disciplina._id,
                          documento_doc.disciplina[0].id)
-        self.assertEqual(documento_data['disciplina'][0].nombre,
+        self.assertEqual(disciplina.nombre,
                          documento_doc.disciplina[0].nombre)
 
-        self.assertEqual(documento_data['subdisciplinas'],
-                         documento_doc.subdisciplinas)
-        self.assertEqual(documento_data['subdisciplinas'][0]._id,
+        self.assertEqual(subdisciplina,
+                         documento_doc.subdisciplinas[0])
+        self.assertEqual(subdisciplina._id,
                          documento_doc.subdisciplinas[0]._id)
-        self.assertEqual(documento_data['subdisciplinas'][0].disciplina,
+        self.assertEqual(subdisciplina.disciplina,
                          documento_doc.subdisciplinas[0].disciplina)
-        self.assertEqual(documento_data['subdisciplinas'][0].nombre,
+        self.assertEqual(subdisciplina.nombre,
                          documento_doc.subdisciplinas[0].nombre)
 
-        self.assertEqual(documento_data['nombres_geograficos'],
-                         documento_doc.nombres_geograficos)
-        self.assertEqual(documento_data['nombres_geograficos'][0]._id,
+        self.assertEqual(nombres_geograficos,
+                         documento_doc.nombres_geograficos[0])
+        self.assertEqual(nombres_geograficos._id,
                          documento_doc.nombres_geograficos[0]._id)
-        self.assertEqual(documento_data['nombres_geograficos'][0].nombre,
+        self.assertEqual(nombres_geograficos.nombre,
                          documento_doc.nombres_geograficos[0].nombre)
 
         self.assertEqual(documento_data['referencias'],
                          documento_doc.referencias)
 
-        self.assertEqual(documento_data['texto_completo'],
-                         documento_doc.texto_completo)
-        self.assertEqual(documento_data['texto_completo'][0].url,
+        self.assertEqual(url_texto_completo,
+                         documento_doc.texto_completo[0])
+        self.assertEqual(url_texto_completo.url,
                          documento_doc.texto_completo[0].url)
-        self.assertEqual(documento_data['texto_completo'][0].descripcion,
+        self.assertEqual(url_texto_completo.descripcion,
                          documento_doc.texto_completo[0].descripcion)
 
-        self.assertEqual(documento_data['marc21'],
+        self.assertEqual(marc21,
                          documento_doc.marc21)
         self.assertEqual(documento_data['fecha_creacion'],
                          documento_doc.fecha_creacion)

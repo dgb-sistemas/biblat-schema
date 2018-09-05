@@ -1,5 +1,6 @@
 # coding: utf-8
 from datetime import datetime
+
 from biblat_schema.models import Revista, Pais
 from biblat_schema.catalogs import DisciplinaRevista
 from .base import BaseTestCase
@@ -19,36 +20,6 @@ class TestJournalModel(BaseTestCase):
         }
         disciplina_doc = DisciplinaRevista(**disciplina_data)
         return disciplina_doc
-
-    def _crear_pais_prueba(self):
-        pais_data = {
-            '_id': 'MX',
-            'nombre': {
-                'es': u'México',
-                'en': 'Mexico'
-            },
-            'alpha2': 'MX',
-            'alpha3': 'MEX',
-            'codigo_pais': '484',
-            'iso_3166_2': 'ISO 3166-2:MX',
-            'region': {
-                'es': 'América',
-                'en': 'Americas'
-            },
-            'sub_region': {
-                'es': 'América Latina y el Caribe',
-                'en': 'Latin America and the Caribbean'
-            },
-            'intermediate_region': {
-                'es': 'Centroamérica',
-                'en': 'Central America'
-            },
-            'codigo_region': '019',
-            'codigo_sub_region': '419',
-            'region_intermedia': '013'
-        }
-        pais_doc = Pais(**pais_data)
-        return pais_doc
 
     def test_solo_campos_requeridos(self):
         # Disciplina revista

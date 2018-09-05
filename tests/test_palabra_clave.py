@@ -31,7 +31,7 @@ class TestKeyWordModel(BaseTestCase):
 
         # Guardamos
         palabra_clave_doc = PalabraClave(**palabra_clave_data)
-
+        palabra_clave_doc.validate()
         # Comprobamos
         # desglosando idioma
         self.assertEqual(palabra_clave_data['idioma']._id,
