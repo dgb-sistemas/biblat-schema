@@ -69,6 +69,7 @@ class NombreGeografico(Document):
     """Esquema de catalogo nombre geografico"""
     _id = StringField(max_length=32, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
+    nota = EmbeddedDocumentField(I18NField)
 
 
 class DisciplinaRevista(Document):
