@@ -52,6 +52,7 @@ class Revista(Document):
             'base_datos',
             'titulo',
             'issn',
+            'issn_electronico',
             'pais',
             'disciplina',
             'idioma'
