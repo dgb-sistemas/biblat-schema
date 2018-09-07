@@ -11,7 +11,7 @@ class TestURLFullTextModel(BaseTestCase):
 
         url_texto_completo_data = {
             'url': 'http://132.248.9.34/hevila/e-BIBLAT/PERIODICA/per7857.pdf',
-            'descripcion': 'Estudios de cultura nahuatl'
+            'descripcion': 'Texto completo (Ver PDF)'
         }
 
         # Guardamos

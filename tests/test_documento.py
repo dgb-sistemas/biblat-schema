@@ -335,6 +335,8 @@ class TestDocumentModel(BaseTestCase):
                          documento_doc.fasciculo._id)
         self.assertEqual(fasciculo.revista,
                          documento_doc.fasciculo.revista)
+        self.assertEqual(fasciculo.revista._id,
+                         documento_doc.fasciculo.revista._id)
         self.assertEqual(fasciculo.volumen,
                          documento_doc.fasciculo.volumen)
         self.assertEqual(fasciculo.numero,
