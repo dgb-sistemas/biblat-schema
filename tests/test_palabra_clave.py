@@ -22,6 +22,7 @@ class TestKeyWordModel(BaseTestCase):
         return Idioma(**idioma_data)
 
     def test_solo_campos_requeridos(self):
+        """Pruebas unitarias de campos requeridos del modelo Palabra Clave"""
         # Datos
         idioma = self._crea_idioma()
         palabra_clave_data = {
@@ -34,13 +35,13 @@ class TestKeyWordModel(BaseTestCase):
         palabra_clave_doc.validate()
         # Comprobamos
         # desglosando idioma
-        self.assertEqual(palabra_clave_data['idioma']._id,
-                         palabra_clave_doc.idioma.id)
+        self.assertEqual(palabra_clave_data['idioma'].id, palabra_clave_doc
+                         .idioma.id)
         self.assertEqual(palabra_clave_data['idioma'].iso_639_1,
                          palabra_clave_doc.idioma.iso_639_1)
         self.assertEqual(palabra_clave_data['idioma'].iso_639_2,
                          palabra_clave_doc.idioma.iso_639_2)
-        self.assertEqual(palabra_clave_data['idioma'].nombre,
-                         palabra_clave_doc.idioma.nombre)
-        self.assertEqual(palabra_clave_data['palabra_clave'],
-                         palabra_clave_doc.palabra_clave)
+        self.assertEqual(palabra_clave_data['idioma'].nombre, palabra_clave_doc
+                         .idioma.nombre)
+        self.assertEqual(palabra_clave_data['palabra_clave'], palabra_clave_doc
+                         .palabra_clave)

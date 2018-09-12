@@ -10,7 +10,7 @@ class TestHistoricalModel(BaseTestCase):
     model_class_to_delete = [Historico]
 
     def test_solo_campos_requeridos(self):
-
+        """Pruebas unitarias de campos requeridos del modelo Historico"""
         # Datos
         historico_data = {
             'catalogador': 'Juan Perez Perez',
@@ -22,8 +22,8 @@ class TestHistoricalModel(BaseTestCase):
         historico_doc = Historico(**historico_data)
         historico_doc.validate()
         # Comprobamos
-        self.assertEqual(historico_data['catalogador'],
-                         historico_doc.catalogador)
+        self.assertEqual(historico_data['catalogador'], historico_doc
+                         .catalogador)
         self.assertEqual(historico_data['nivel'], historico_doc.nivel)
-        self.assertEqual(historico_data['fecha_hora'],
-                         historico_doc.fecha_hora)
+        self.assertEqual(historico_data['fecha_hora'], historico_doc
+                         .fecha_hora)

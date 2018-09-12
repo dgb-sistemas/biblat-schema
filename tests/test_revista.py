@@ -22,6 +22,7 @@ class TestJournalModel(BaseTestCase):
         return disciplina_doc
 
     def test_solo_campos_requeridos(self):
+        """Pruebas unitarias de campos requeridos del modelo Revista"""
         # Disciplina revista
         disciplina_doc = self._crear_disciplina_revista_prueba()
 
@@ -71,7 +72,7 @@ class TestJournalModel(BaseTestCase):
         revista_doc.save()
 
         # Comprobamos
-        self.assertEqual(revista_id, revista_doc._id)
+        self.assertEqual(revista_id, revista_doc.id)
         self.assertEqual(revista_data['base_datos'], revista_doc.base_datos)
         self.assertEqual(revista_data['titulo'], revista_doc.titulo)
         self.assertEqual(revista_data['issn'], revista_doc.issn)

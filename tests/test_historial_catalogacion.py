@@ -30,6 +30,8 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         return historico
 
     def test_solo_campos_requeridos(self):
+        """Pruebas unitarias de campos requeridos del modelo Historial
+        Catalogacion"""
         # Datos
         historico = self._crea_historico()
         historico2 = self._crea_historico2()
@@ -56,22 +58,20 @@ class TestCatalogationHistoricalModel(BaseTestCase):
 
                          historial_catalogacion_doc.catalogacion)
 
-        self.assertEqual(historial_catalogacion_data['catalogacion'][
-                             0].catalogador,
-                         historial_catalogacion_doc.catalogacion[
-                             0].catalogador)
+        self.assertEqual(historial_catalogacion_data['catalogacion'][0]
+                         .catalogador, historial_catalogacion_doc
+                         .catalogacion[0].catalogador)
         self.assertEqual(historial_catalogacion_data['catalogacion'][0].nivel,
                          historial_catalogacion_doc.catalogacion[0].nivel)
         self.assertEqual(historial_catalogacion_data['catalogacion'][
-                             0].fecha_hora,
-                         historial_catalogacion_doc.catalogacion[0].fecha_hora)
+                             0].fecha_hora, historial_catalogacion_doc
+                         .catalogacion[0].fecha_hora)
 
-        self.assertEqual(historial_catalogacion_data['catalogacion'][
-                             1].catalogador,
-                         historial_catalogacion_doc.catalogacion[
-                             1].catalogador)
+        self.assertEqual(historial_catalogacion_data['catalogacion'][1]
+                         .catalogador, historial_catalogacion_doc
+                         .catalogacion[1].catalogador)
         self.assertEqual(historial_catalogacion_data['catalogacion'][1].nivel,
                          historial_catalogacion_doc.catalogacion[1].nivel)
-        self.assertEqual(historial_catalogacion_data['catalogacion'][
-                             1].fecha_hora,
-                         historial_catalogacion_doc.catalogacion[1].fecha_hora)
+        self.assertEqual(historial_catalogacion_data['catalogacion'][1]
+                         .fecha_hora, historial_catalogacion_doc
+                         .catalogacion[1].fecha_hora)

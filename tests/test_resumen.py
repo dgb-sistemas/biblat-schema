@@ -22,6 +22,7 @@ class TestSummaryModel(BaseTestCase):
         return Idioma(** idioma_data)
 
     def test_solo_campos_requeridos(self):
+        """Pruebas unitarias de campos requeridos del modelo Resumen"""
         idioma = self._crea_idioma()
 
         resumen_data = {
@@ -48,12 +49,12 @@ class TestSummaryModel(BaseTestCase):
         resumen_doc = Resumen(**resumen_data)
         resumen_doc.validate()
 
-        self.assertEqual(resumen_data['idioma']._id, resumen_doc.idioma._id)
-        self.assertEqual(resumen_data['idioma'].iso_639_1,
-                         resumen_doc.idioma.iso_639_1)
-        self.assertEqual(resumen_data['idioma'].iso_639_2,
-                         resumen_doc.idioma.iso_639_2)
-        self.assertEqual(resumen_data['idioma'].nombre,
-                         resumen_doc.idioma.nombre)
+        self.assertEqual(resumen_data['idioma'].id, resumen_doc.idioma.id)
+        self.assertEqual(resumen_data['idioma'].iso_639_1, resumen_doc.idioma
+                         .iso_639_1)
+        self.assertEqual(resumen_data['idioma'].iso_639_2, resumen_doc.idioma
+                         .iso_639_2)
+        self.assertEqual(resumen_data['idioma'].nombre, resumen_doc.idioma
+                         .nombre)
         self.assertEqual(resumen_data['idioma'], resumen_doc.idioma)
         self.assertEqual(resumen_data['resumen'], resumen_doc.resumen)

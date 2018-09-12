@@ -40,6 +40,8 @@ class TestCorporativeAuthorModel(BaseTestCase):
         return Pais(**pais_data)
 
     def test_solo_campos_requeridos(self):
+        """Pruebas unitarias de campos requeridos del modelo Autor
+        Corporativo"""
         # Datos
         pais = self._crea_pais()
         autor_corporativo_data = {
@@ -59,9 +61,9 @@ class TestCorporativeAuthorModel(BaseTestCase):
         self.assertEqual(autor_corporativo_data['dependencia'],
                          autor_corporativo_doc.dependencia)
         # Desglose de pais
-        self.assertEqual(autor_corporativo_data['pais'],
-                         autor_corporativo_doc.pais)
-        self.assertEqual(autor_corporativo_data['pais']._id,
+        self.assertEqual(autor_corporativo_data['pais'], autor_corporativo_doc
+                         .pais)
+        self.assertEqual(autor_corporativo_data['pais'].id,
                          autor_corporativo_doc.pais['_id'])
         self.assertEqual(autor_corporativo_data['pais'].nombre,
                          autor_corporativo_doc.pais['nombre'])
