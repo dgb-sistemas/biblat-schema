@@ -253,6 +253,7 @@ class TestDocumentModel(BaseTestCase):
             '_id': _id,
             'revista': revista,
             'fasciculo': fasciculo,
+            'numero_sistema': '000463924',
             'titulo_documento': 'Filling gaps in the distribution of the '
                                 'white-winged vampire bat, Diaemus youngii ('
                                 'Phyllostomidae, Desmodontinae): new records '
@@ -345,6 +346,8 @@ class TestDocumentModel(BaseTestCase):
         self.assertEqual(fasciculo.fecha_actualizacion, documento_doc.fasciculo
                          .fecha_actualizacion)
 
+        self.assertEqual(documento_data['numero_sistema'],
+                         documento_doc.numero_sistema)
         self.assertEqual(documento_data['titulo_documento'], documento_doc
                          .titulo_documento)
         self.assertEqual(documento_data['doi'], documento_doc.doi)
