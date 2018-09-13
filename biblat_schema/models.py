@@ -61,6 +61,19 @@ class Revista(Document):
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
 
+    meta = {
+        'collection': 'revistas',
+        'indexes': [
+            'base_datos',
+            'titulo',
+            'issn',
+            'issn_electronico',
+            'pais',
+            'disciplina',
+            'idioma'
+        ]
+    }
+
 
 class Fasciculo(Document):
     """Esquema de fascículo
@@ -84,6 +97,16 @@ class Fasciculo(Document):
     parte = StringField(max_length=100)
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
+
+    meta = {
+        'collection': 'fasciculos',
+        'indexes': [
+            'revista',
+            'anio',
+            'volumen',
+            'numero'
+        ]
+    }
 
 
 class Resumen(EmbeddedDocument):
@@ -158,6 +181,7 @@ class Documento(Document):
     _id = StringField(max_length=32, primary_key=True, required=True)
     revista = ReferenceField(Revista, required=True)
     fasciculo = ReferenceField(Fasciculo, required=True)
+    numero_sistema = StringField(max_length=14, required=True)
     titulo_documento = StringField(max_length=256, required=True)
     doi = StringField(max_length=256)
     idioma = ListField(ReferenceField(Idioma))
@@ -178,6 +202,21 @@ class Documento(Document):
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
 
+    meta = {
+        'collection': 'documentos',
+        'indexes': [
+            'revista',
+            'autor',
+            'institucion',
+            'palabra_clave',
+            'fasciculo',
+            'numero_sistema',
+            'titulo_documento',
+            'doi',
+            'idioma'
+        ]
+    }
+
 
 class Historico(EmbeddedDocument):
     """Esquema histórico
@@ -191,5 +230,13 @@ class Historico(EmbeddedDocument):
 
 class HistorialCatalogacion(Document):
     """Esquema de historial de catalogación"""
-    documento = StringField(max_length=32, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True)
+    documento = ReferenceField(Documento, required=True)
     catalogacion = EmbeddedDocumentListField(Historico, required=True)
+
+    meta = {
+        'collection': 'historial_catalogacion',
+        'indexes': [
+            'documento'
+        ]
+    }
