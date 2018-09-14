@@ -38,15 +38,29 @@ class TestSubdisciplineModel(BaseTestCase):
         subdisciplina_doc = SubDisciplina(**subdisciplina_data)
         subdisciplina_doc.save()
         # Comprobamos
-        self.assertEqual(subdisciplina_data['_id'],
-                         subdisciplina_doc.id)
+        self.assertEqual(
+            subdisciplina_data['_id'],
+            subdisciplina_doc.id
+        )
         # Desglose disciplina
-        self.assertEqual(subdisciplina_data['disciplina'], subdisciplina_doc
-                         .disciplina)
-        self.assertEqual(subdisciplina_data['disciplina'].id, subdisciplina_doc
-                         .disciplina.id)
-        self.assertEqual(subdisciplina_data['disciplina'].nombre,
-                         subdisciplina_doc.disciplina.nombre)
+        self.assertEqual(
+            subdisciplina_data['disciplina'],
+            subdisciplina_doc.disciplina
+        )
+        self.assertEqual(
+            subdisciplina_data['disciplina'].id,
+            subdisciplina_doc.disciplina.id
+        )
+        self.assertEqual(
+            subdisciplina_data['disciplina'].nombre,
+            subdisciplina_doc.disciplina.nombre
+        )
 
-        self.assertEqual(subdisciplina_data['nombre'], subdisciplina_doc
-                         .nombre)
+        self.assertEqual(
+            subdisciplina_data['nombre'],
+            subdisciplina_doc.nombre
+        )
+        self.assertEqual(
+            1,
+            SubDisciplina.objects.all().count()
+        )

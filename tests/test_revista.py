@@ -72,10 +72,31 @@ class TestJournalModel(BaseTestCase):
         revista_doc.save()
 
         # Comprobamos
-        self.assertEqual(revista_id, revista_doc.id)
-        self.assertEqual(revista_data['base_datos'], revista_doc.base_datos)
-        self.assertEqual(revista_data['titulo'], revista_doc.titulo)
-        self.assertEqual(revista_data['issn'], revista_doc.issn)
-        self.assertEqual(pais_doc, revista_doc.pais)
-        self.assertEqual(disciplina_doc, revista_doc.disciplina)
-        self.assertEqual(1, Revista.objects.all().count())
+        self.assertEqual(
+            revista_id,
+            revista_doc.id
+        )
+        self.assertEqual(
+            revista_data['base_datos'],
+            revista_doc.base_datos
+        )
+        self.assertEqual(
+            revista_data['titulo'],
+            revista_doc.titulo
+        )
+        self.assertEqual(
+            revista_data['issn'],
+            revista_doc.issn
+        )
+        self.assertEqual(
+            pais_doc,
+            revista_doc.pais
+        )
+        self.assertEqual(
+            disciplina_doc,
+            revista_doc.disciplina
+        )
+        self.assertEqual(
+            1,
+            Revista.objects.all().count()
+        )

@@ -21,7 +21,14 @@ class TestAuthorModel(BaseTestCase):
         autor_doc = Autor(**autor_data)
         autor_doc.validate()
         # Comprobamos
-        self.assertEqual(autor_data['nombre'], autor_doc.nombre)
-        self.assertEqual(autor_data['correo_electronico'], autor_doc
-                         .correo_electronico)
-        self.assertEqual(autor_data['referencia'], autor_doc.referencia)
+        self.assertEqual(
+            autor_data['nombre'],
+            autor_doc.nombre
+        )
+        self.assertEqual(
+            autor_data['correo_electronico'],
+            autor_doc.correo_electronico)
+        self.assertEqual(
+            autor_data['referencia'],
+            autor_doc.referencia
+        )

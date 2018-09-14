@@ -38,29 +38,72 @@ class TestGeographicNameModel(BaseTestCase):
         pais_doc.save()
         # Comprobamos
 
-        self.assertEqual(pais_data['_id'], pais_doc.id)
+        self.assertEqual(
+            pais_data['_id'],
+            pais_doc.id
+        )
 
-        self.assertEqual(pais_data['nombre']['en'],
-                         pais_doc.nombre['en'])
-        self.assertEqual(pais_data['nombre']['es'],
-                         pais_doc.nombre['es'])
-        self.assertEqual(pais_data['alpha2'], pais_doc.alpha2)
-        self.assertEqual(pais_data['alpha3'], pais_doc.alpha3)
-        self.assertEqual(pais_data['codigo_pais'], pais_doc.codigo_pais)
-        self.assertEqual(pais_data['iso_3166_2'], pais_doc.iso_3166_2)
-        self.assertEqual(pais_data['region']['es'], pais_doc.region['es'])
-        self.assertEqual(pais_data['region']['en'], pais_doc.region['en'])
-        self.assertEqual(pais_data['sub_region']['es'], pais_doc.sub_region[
-            'es'])
-        self.assertEqual(pais_data['sub_region']['en'], pais_doc.sub_region[
-            'en'])
-        self.assertEqual(pais_data['intermediate_region']['es'],
-                         pais_doc.intermediate_region['es'])
-        self.assertEqual(pais_data['intermediate_region']['en'],
-                         pais_doc.intermediate_region['en'])
-        self.assertEqual(pais_data['codigo_region'], pais_doc.codigo_region)
-        self.assertEqual(pais_data['codigo_sub_region'], pais_doc
-                         .codigo_sub_region)
-        self.assertEqual(pais_data['region_intermedia'],
-                         pais_doc.region_intermedia)
-        self.assertEqual(1, Pais.objects.all().count())
+        self.assertEqual(
+            pais_data['nombre']['en'],
+            pais_doc.nombre['en']
+        )
+        self.assertEqual(
+            pais_data['nombre']['es'],
+            pais_doc.nombre['es']
+        )
+        self.assertEqual(
+            pais_data['alpha2'],
+            pais_doc.alpha2
+        )
+        self.assertEqual(
+            pais_data['alpha3'],
+            pais_doc.alpha3
+        )
+        self.assertEqual(
+            pais_data['codigo_pais'],
+            pais_doc.codigo_pais
+        )
+        self.assertEqual(
+            pais_data['iso_3166_2'],
+            pais_doc.iso_3166_2
+        )
+        self.assertEqual(
+            pais_data['region']['es'],
+            pais_doc.region['es']
+        )
+        self.assertEqual(
+            pais_data['region']['en'],
+            pais_doc.region['en']
+        )
+        self.assertEqual(
+            pais_data['sub_region']['es'],
+            pais_doc.sub_region['es']
+        )
+        self.assertEqual(
+            pais_data['sub_region']['en'],
+            pais_doc.sub_region['en']
+        )
+        self.assertEqual(
+            pais_data['intermediate_region']['es'],
+            pais_doc.intermediate_region['es']
+        )
+        self.assertEqual(
+            pais_data['intermediate_region']['en'],
+            pais_doc.intermediate_region['en']
+        )
+        self.assertEqual(
+            pais_data['codigo_region'],
+            pais_doc.codigo_region
+        )
+        self.assertEqual(
+            pais_data['codigo_sub_region'],
+            pais_doc.codigo_sub_region
+        )
+        self.assertEqual(
+            pais_data['region_intermedia'],
+            pais_doc.region_intermedia
+        )
+        self.assertEqual(
+            1,
+            Pais.objects.all().count()
+        )

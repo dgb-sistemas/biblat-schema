@@ -2,12 +2,22 @@
 
 from datetime import datetime
 
-from biblat_schema.catalogs import I18NField, Idioma, Pais, TipoDocumento, \
-    EnfoqueDocumento, Disciplina, SubDisciplina, NombreGeografico
+from biblat_schema.catalogs import (
+    I18NField,
+    Idioma,
+    Pais,
+    TipoDocumento,
+    EnfoqueDocumento,
+    Disciplina
+)
 from biblat_schema.marc import MarcDocumentField
-from biblat_schema.models import HistorialCatalogacion, Historico, Revista, \
-    Fasciculo, Autor, AutorCorporativo, Institucion, Resumen, PalabraClave, \
-    UrlTextoCompleto, Documento
+from biblat_schema.models import (
+    HistorialCatalogacion,
+    Historico, Revista,
+    Fasciculo,
+    PalabraClave,
+    Documento
+)
 from .base import BaseTestCase
 
 
@@ -148,10 +158,6 @@ class TestCatalogationHistoricalModel(BaseTestCase):
 
         fasciculo = self._crea_fasciculo()
         revista = fasciculo.revista
-        pais_revista = revista.pais
-        pais_autor_corporativo = Pais.objects(alpha2='MX').first()
-        pais_institucion = Pais.objects(alpha2='MX').first()
-
         idioma = self._crea_idioma()
 
         palabra_clave = PalabraClave(**{
@@ -233,146 +239,219 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         )
         historial_catalogacion_doc.save()
         # Comprobamos
-        self.assertEqual(documento,
-                         historial_catalogacion_doc.documento)
-        self.assertEqual(documento.id, historial_catalogacion_doc.documento.id)
+        self.assertEqual(
+            documento,
+            historial_catalogacion_doc.documento
+        )
+        self.assertEqual(
+            documento.id,
+            historial_catalogacion_doc.documento.id
+        )
 
-        self.assertEqual(documento.revista.id,
-                         historial_catalogacion_doc.documento.revista.id)
-        self.assertEqual(documento.revista.base_datos,
-                         historial_catalogacion_doc.documento.revista
-                         .base_datos)
-        self.assertEqual(documento.revista.titulo,
-                         historial_catalogacion_doc.documento.revista.titulo)
-        self.assertEqual(documento.revista.issn,
-                         historial_catalogacion_doc.documento.revista.issn)
-        self.assertEqual(documento.revista.disciplina,
-                         historial_catalogacion_doc.documento.revista
-                         .disciplina)
-        self.assertEqual(documento.revista.fecha_creacion,
-                         historial_catalogacion_doc.documento.revista
-                         .fecha_creacion)
-        self.assertEqual(documento.revista.fecha_actualizacion,
-                         historial_catalogacion_doc.documento.revista
-                         .fecha_actualizacion)
+        self.assertEqual(
+            documento.revista.id,
+            historial_catalogacion_doc.documento.revista.id
+        )
+        self.assertEqual(
+            documento.revista.base_datos,
+            historial_catalogacion_doc.documento.revista.base_datos
+        )
+        self.assertEqual(
+            documento.revista.titulo,
+            historial_catalogacion_doc.documento.revista.titulo
+        )
+        self.assertEqual(
+            documento.revista.issn,
+            historial_catalogacion_doc.documento.revista.issn
+        )
+        self.assertEqual(
+            documento.revista.disciplina,
+            historial_catalogacion_doc.documento.revista.disciplina
+        )
+        self.assertEqual(
+            documento.revista.fecha_creacion,
+            historial_catalogacion_doc.documento.revista.fecha_creacion
+        )
+        self.assertEqual(
+            documento.revista.fecha_actualizacion,
+            historial_catalogacion_doc.documento.revista.fecha_actualizacion
+        )
 
-        self.assertEqual(documento.fasciculo.id,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .id)
-        self.assertEqual(documento.fasciculo.revista,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .revista)
+        self.assertEqual(
+            documento.fasciculo.id,
+            historial_catalogacion_doc.documento.fasciculo.id
+        )
+        self.assertEqual(
+            documento.fasciculo.revista,
+            historial_catalogacion_doc.documento.fasciculo.revista
+        )
 
-        self.assertEqual(documento.fasciculo.revista.id,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .revista.id)
-        self.assertEqual(documento.fasciculo.revista.base_datos,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .revista.base_datos)
-        self.assertEqual(documento.fasciculo.revista.titulo,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .revista.titulo)
-        self.assertEqual(documento.fasciculo.revista.issn,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .revista.issn)
-        self.assertEqual(documento.fasciculo.revista.disciplina,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .revista.disciplina)
-        self.assertEqual(documento.fasciculo.revista.fecha_creacion,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .revista.fecha_creacion)
-        self.assertEqual(documento.fasciculo.revista.fecha_actualizacion,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .revista.fecha_actualizacion)
+        self.assertEqual(
+            documento.fasciculo.revista.id,
+            historial_catalogacion_doc.documento.fasciculo.revista.id
+        )
+        self.assertEqual(
+            documento.fasciculo.revista.base_datos,
+            historial_catalogacion_doc.documento.fasciculo.revista.base_datos
+        )
+        self.assertEqual(
+            documento.fasciculo.revista.titulo,
+            historial_catalogacion_doc.documento.fasciculo.revista.titulo
+        )
+        self.assertEqual(
+            documento.fasciculo.revista.issn,
+            historial_catalogacion_doc.documento.fasciculo.revista.issn
+        )
+        self.assertEqual(
+            documento.fasciculo.revista.disciplina,
+            historial_catalogacion_doc.documento.fasciculo.revista.disciplina
+        )
+        self.assertEqual(
+            documento.fasciculo.revista.fecha_creacion,
+            historial_catalogacion_doc.documento.fasciculo.revista.fecha_creacion
+        )
+        self.assertEqual(
+            documento.fasciculo.revista.fecha_actualizacion,
+            historial_catalogacion_doc.documento.fasciculo.revista.fecha_actualizacion
+        )
 
-        self.assertEqual(documento.fasciculo.anio,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .anio)
-        self.assertEqual(documento.fasciculo.mes_inicial,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .mes_inicial)
-        self.assertEqual(documento.fasciculo.mes_final,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .mes_final)
-        self.assertEqual(documento.fasciculo.fecha_creacion,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .fecha_creacion)
-        self.assertEqual(documento.fasciculo.fecha_actualizacion,
-                         historial_catalogacion_doc.documento.fasciculo
-                         .fecha_actualizacion)
-        self.assertEqual(documento.numero_sistema,
-                         historial_catalogacion_doc.documento.numero_sistema)
-        self.assertEqual(documento.titulo_documento,
-                         historial_catalogacion_doc.documento.titulo_documento)
-        self.assertEqual(documento.palabra_clave,
-                         historial_catalogacion_doc.documento.palabra_clave)
-        self.assertEqual(documento.palabra_clave[0],
-                         historial_catalogacion_doc.documento.palabra_clave[0]
-                         )
-        self.assertEqual(documento.palabra_clave[0]['idioma'],
-                         historial_catalogacion_doc.documento.palabra_clave[
-                             0]['idioma'])
-        self.assertEqual(documento.palabra_clave[0]['palabra_clave'],
-                         historial_catalogacion_doc.documento.palabra_clave[
-                             0]['palabra_clave'])
-        self.assertEqual(documento.tipo_documento,
-                         historial_catalogacion_doc.documento.tipo_documento)
-        self.assertEqual(documento.tipo_documento,
-                         historial_catalogacion_doc.documento.tipo_documento)
-        self.assertEqual(documento.tipo_documento.id,
-                         historial_catalogacion_doc.documento.tipo_documento
-                         .id)
-        self.assertEqual(documento.tipo_documento.nombre,
-                         historial_catalogacion_doc.documento.tipo_documento
-                         .nombre)
-        self.assertEqual(documento.tipo_documento.descripcion,
-                         historial_catalogacion_doc.documento.tipo_documento
-                         .descripcion)
-        self.assertEqual(documento.enfoque_documento,
-                         historial_catalogacion_doc
-                         .documento.enfoque_documento)
-        self.assertEqual(documento.enfoque_documento.id,
-                         historial_catalogacion_doc.documento.enfoque_documento
-                         .id)
-        self.assertEqual(documento.enfoque_documento.nombre,
-                         historial_catalogacion_doc.documento.enfoque_documento
-                         .nombre)
-        self.assertEqual(documento.enfoque_documento.descripcion,
-                         historial_catalogacion_doc.documento.enfoque_documento
-                         .descripcion)
-        self.assertEqual(documento.disciplina,
-                         historial_catalogacion_doc.documento
-                         .disciplina)
-        self.assertEqual(documento.disciplina[0].id,
-                         historial_catalogacion_doc.documento.disciplina[0]
-                         .id)
-        self.assertEqual(documento.disciplina[0].nombre,
-                         historial_catalogacion_doc.documento.disciplina[0]
-                         .nombre)
-        self.assertEqual(documento.marc21, historial_catalogacion_doc.documento
-                         .marc21)
-        self.assertEqual(documento.marc21, historial_catalogacion_doc.documento
-                         .marc21)
-        self.assertEqual(documento.fecha_creacion, historial_catalogacion_doc
-                         .documento.fecha_creacion)
-        self.assertEqual(documento.fecha_actualizacion,
-                         historial_catalogacion_doc.documento
-                         .fecha_actualizacion)
-        self.assertEqual(historial_catalogacion_data['catalogacion'],
-                         historial_catalogacion_doc.catalogacion)
-        self.assertEqual(historial_catalogacion_data['catalogacion'][0]
-                         .catalogador, historial_catalogacion_doc
-                         .catalogacion[0].catalogador)
-        self.assertEqual(historial_catalogacion_data['catalogacion'][0].nivel,
-                         historial_catalogacion_doc.catalogacion[0].nivel)
-        self.assertEqual(historial_catalogacion_data['catalogacion'][0]
-                         .fecha_hora, historial_catalogacion_doc
-                         .catalogacion[0].fecha_hora)
-        self.assertEqual(historial_catalogacion_data['catalogacion'][1]
-                         .catalogador, historial_catalogacion_doc
-                         .catalogacion[1].catalogador)
-        self.assertEqual(historial_catalogacion_data['catalogacion'][1].nivel,
-                         historial_catalogacion_doc.catalogacion[1].nivel)
-        self.assertEqual(historial_catalogacion_data['catalogacion'][1]
-                         .fecha_hora, historial_catalogacion_doc
-                         .catalogacion[1].fecha_hora)
+        self.assertEqual(
+            documento.fasciculo.anio,
+            historial_catalogacion_doc.documento.fasciculo.anio
+        )
+        self.assertEqual(
+            documento.fasciculo.mes_inicial,
+            historial_catalogacion_doc.documento.fasciculo.mes_inicial
+        )
+        self.assertEqual(
+            documento.fasciculo.mes_final,
+            historial_catalogacion_doc.documento.fasciculo.mes_final
+        )
+        self.assertEqual(
+            documento.fasciculo.fecha_creacion,
+            historial_catalogacion_doc.documento.fasciculo.fecha_creacion
+        )
+        self.assertEqual(
+            documento.fasciculo.fecha_actualizacion,
+            historial_catalogacion_doc.documento.fasciculo.fecha_actualizacion
+        )
+        self.assertEqual(
+            documento.numero_sistema,
+            historial_catalogacion_doc.documento.numero_sistema
+        )
+        self.assertEqual(
+            documento.titulo_documento,
+            historial_catalogacion_doc.documento.titulo_documento
+        )
+        self.assertEqual(
+            documento.palabra_clave,
+            historial_catalogacion_doc.documento.palabra_clave
+        )
+        self.assertEqual(
+            documento.palabra_clave[0],
+            historial_catalogacion_doc.documento.palabra_clave[0]
+        )
+        self.assertEqual(
+            documento.palabra_clave[0]['idioma'],
+            historial_catalogacion_doc.documento.palabra_clave[0]['idioma']
+        )
+        self.assertEqual(
+            documento.palabra_clave[0]['palabra_clave'],
+            historial_catalogacion_doc.documento.palabra_clave[0]['palabra_clave']
+        )
+        self.assertEqual(
+            documento.tipo_documento,
+            historial_catalogacion_doc.documento.tipo_documento
+        )
+        self.assertEqual(
+            documento.tipo_documento,
+            historial_catalogacion_doc.documento.tipo_documento
+        )
+        self.assertEqual(
+            documento.tipo_documento.id,
+            historial_catalogacion_doc.documento.tipo_documento.id
+        )
+        self.assertEqual(
+            documento.tipo_documento.nombre,
+            historial_catalogacion_doc.documento.tipo_documento.nombre
+        )
+        self.assertEqual(
+            documento.tipo_documento.descripcion,
+            historial_catalogacion_doc.documento.tipo_documento.descripcion
+        )
+        self.assertEqual(
+            documento.enfoque_documento,
+            historial_catalogacion_doc.documento.enfoque_documento
+        )
+        self.assertEqual(
+            documento.enfoque_documento.id,
+            historial_catalogacion_doc.documento.enfoque_documento.id
+        )
+        self.assertEqual(
+            documento.enfoque_documento.nombre,
+            historial_catalogacion_doc.documento.enfoque_documento.nombre
+        )
+        self.assertEqual(
+            documento.enfoque_documento.descripcion,
+            historial_catalogacion_doc.documento.enfoque_documento.descripcion
+        )
+        self.assertEqual(
+            documento.disciplina,
+            historial_catalogacion_doc.documento.disciplina
+        )
+        self.assertEqual(
+            documento.disciplina[0].id,
+            historial_catalogacion_doc.documento.disciplina[0].id
+        )
+        self.assertEqual(
+            documento.disciplina[0].nombre,
+            historial_catalogacion_doc.documento.disciplina[0].nombre
+        )
+        self.assertEqual(
+            documento.marc21,
+            historial_catalogacion_doc.documento.marc21
+        )
+        self.assertEqual(
+            documento.marc21,
+            historial_catalogacion_doc.documento.marc21
+        )
+        self.assertEqual(
+            documento.fecha_creacion,
+            historial_catalogacion_doc.documento.fecha_creacion
+        )
+        self.assertEqual(
+            documento.fecha_actualizacion,
+            historial_catalogacion_doc.documento.fecha_actualizacion
+        )
+        self.assertEqual(
+            historial_catalogacion_data['catalogacion'],
+            historial_catalogacion_doc.catalogacion
+        )
+        self.assertEqual(
+            historial_catalogacion_data['catalogacion'][0].catalogador,
+            historial_catalogacion_doc.catalogacion[0].catalogador
+        )
+        self.assertEqual(
+            historial_catalogacion_data['catalogacion'][0].nivel,
+            historial_catalogacion_doc.catalogacion[0].nivel
+        )
+        self.assertEqual(
+            historial_catalogacion_data['catalogacion'][0].fecha_hora,
+            historial_catalogacion_doc.catalogacion[0].fecha_hora
+        )
+        self.assertEqual(
+            historial_catalogacion_data['catalogacion'][1].catalogador,
+            historial_catalogacion_doc.catalogacion[1].catalogador
+        )
+        self.assertEqual(
+            historial_catalogacion_data['catalogacion'][1].nivel,
+            historial_catalogacion_doc.catalogacion[1].nivel
+        )
+        self.assertEqual(
+            historial_catalogacion_data['catalogacion'][1].fecha_hora,
+            historial_catalogacion_doc.catalogacion[1].fecha_hora
+        )
+        self.assertEqual(
+            1,
+            HistorialCatalogacion.objects.all().count()
+        )

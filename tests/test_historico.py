@@ -22,8 +22,15 @@ class TestHistoricalModel(BaseTestCase):
         historico_doc = Historico(**historico_data)
         historico_doc.validate()
         # Comprobamos
-        self.assertEqual(historico_data['catalogador'], historico_doc
-                         .catalogador)
-        self.assertEqual(historico_data['nivel'], historico_doc.nivel)
-        self.assertEqual(historico_data['fecha_hora'], historico_doc
-                         .fecha_hora)
+        self.assertEqual(
+            historico_data['catalogador'],
+            historico_doc.catalogador
+        )
+        self.assertEqual(
+            historico_data['nivel'],
+            historico_doc.nivel
+        )
+        self.assertEqual(
+            historico_data['fecha_hora'],
+            historico_doc.fecha_hora
+        )
