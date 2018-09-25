@@ -11,7 +11,7 @@ from biblat_schema.catalogs import (
     Disciplina
 )
 from biblat_schema.marc import MarcDocumentField
-from biblat_schema.utils import FREQUENCY
+from biblat_schema.choices import FREQUENCY
 from biblat_schema.models import (
     HistorialCatalogacion,
     Historico, Revista,

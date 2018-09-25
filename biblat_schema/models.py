@@ -14,7 +14,7 @@ from mongoengine import (
 )
 
 from .marc import MarcDocumentField
-from .utils import FREQUENCY
+from .choices import FREQUENCY
 from .catalogs import (
     DisciplinaRevista,
     Pais,

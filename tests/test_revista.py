@@ -3,7 +3,7 @@ from datetime import datetime
 
 from biblat_schema.models import Revista, Pais
 from biblat_schema.catalogs import DisciplinaRevista
-from biblat_schema.utils import FREQUENCY
+from biblat_schema.choices import FREQUENCY
 from .base import BaseTestCase
 
 

@@ -18,7 +18,7 @@ from biblat_schema.models import (
     EnfoqueDocumento
 )
 from biblat_schema.catalogs import I18NField, Disciplina, Pais, Idioma
-from biblat_schema.utils import FREQUENCY
+from biblat_schema.choices import FREQUENCY
 from .base import BaseTestCase
 
 
