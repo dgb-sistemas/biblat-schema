@@ -39,7 +39,7 @@ class TestDocumentModel(BaseTestCase):
         idioma_data = {
             '_id': _id,
             'iso_639_1': 'es',
-            'iso_639_2': 'spa',
+            'iso_639_3': 'spa',
             'nombre': nombre
         }
         return Idioma(**idioma_data)
@@ -638,8 +638,8 @@ class TestDocumentModel(BaseTestCase):
             documento_doc.resumen[0].idioma.iso_639_1
         )
         self.assertEqual(
-            idioma.iso_639_2,
-            documento_doc.resumen[0].idioma.iso_639_2
+            idioma.iso_639_3,
+            documento_doc.resumen[0].idioma.iso_639_3
         )
         self.assertEqual(
             idioma.nombre,
