@@ -14,6 +14,7 @@ from mongoengine import (
 )
 
 from .marc import MarcDocumentField
+from .choices import FREQUENCY
 from .catalogs import (
     DisciplinaRevista,
     Pais,
@@ -60,6 +61,7 @@ class Revista(Document):
     portada = StringField(max_length=100)
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
+    periodicidad = StringField(max_length=1, choices=FREQUENCY, required=True)
 
     meta = {
         'collection': 'revistas',
@@ -201,6 +203,8 @@ class Documento(Document):
     marc21 = EmbeddedDocumentField(MarcDocumentField, required=True)
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
+    fecha_recepcion = DateTimeField()
+    fecha_aceptacion = DateTimeField()
 
     meta = {
         'collection': 'documentos',
