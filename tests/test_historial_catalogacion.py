@@ -35,7 +35,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         idioma_data = {
             '_id': _id,
             'iso_639_1': 'es',
-            'iso_639_2': 'spa',
+            'iso_639_3': 'spa',
             'nombre': nombre
         }
         return Idioma(**idioma_data)

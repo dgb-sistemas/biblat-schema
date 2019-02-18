@@ -16,7 +16,7 @@ class TestKeyWordModel(BaseTestCase):
         idioma_data = {
             '_id': _id,
             'iso_639_1': 'es',
-            'iso_639_2': 'spa',
+            'iso_639_3': 'spa',
             'nombre': nombre
         }
         return Idioma(**idioma_data)
@@ -44,8 +44,8 @@ class TestKeyWordModel(BaseTestCase):
             palabra_clave_doc.idioma.iso_639_1
         )
         self.assertEqual(
-            palabra_clave_data['idioma'].iso_639_2,
-            palabra_clave_doc.idioma.iso_639_2
+            palabra_clave_data['idioma'].iso_639_3,
+            palabra_clave_doc.idioma.iso_639_3
         )
         self.assertEqual(
             palabra_clave_data['idioma'].nombre,
