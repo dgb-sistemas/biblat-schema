@@ -277,7 +277,9 @@ class TestDocumentModel(BaseTestCase):
             'texto_completo': [url_texto_completo],
             'marc21': marc21,
             'fecha_creacion': datetime.now(),
-            'fecha_actualizacion': datetime.now()
+            'fecha_actualizacion': datetime.now(),
+            'fecha_recepcion': '2018-02-01',
+            'fecha_aceptacion': '2018-10-24'
         }
 
         # Guardamos

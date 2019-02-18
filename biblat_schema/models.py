@@ -203,6 +203,8 @@ class Documento(Document):
     marc21 = EmbeddedDocumentField(MarcDocumentField, required=True)
     fecha_creacion = DateTimeField(required=True)
     fecha_actualizacion = DateTimeField(required=True)
+    fecha_recepcion = DateTimeField()
+    fecha_aceptacion = DateTimeField()
 
     meta = {
         'collection': 'documentos',
