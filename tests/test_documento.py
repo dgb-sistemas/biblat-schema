@@ -18,6 +18,7 @@ from biblat_schema.models import (
     EnfoqueDocumento
 )
 from biblat_schema.catalogs import I18NField, Disciplina, Pais, Idioma
+from biblat_schema.choices import FREQUENCY
 from .base import BaseTestCase
 
 
@@ -127,6 +128,7 @@ class TestDocumentModel(BaseTestCase):
         pais = self._crea_pais()
         pais.save()
         disciplina = self._crea_disciplina()
+        periodicidad = FREQUENCY[0][0]
         revista_data = {
             '_id': _id,
             'base_datos': 'CLA01',
@@ -136,6 +138,7 @@ class TestDocumentModel(BaseTestCase):
             'disciplina': disciplina,
             'fecha_creacion': datetime.now(),
             'fecha_actualizacion': datetime.now(),
+            'periodicidad': periodicidad
         }
         return Revista(**revista_data)
 
@@ -315,6 +318,10 @@ class TestDocumentModel(BaseTestCase):
         self.assertEqual(
             revista.fecha_actualizacion,
             documento_doc.revista.fecha_actualizacion
+        )
+        self.assertEqual(
+            revista.periodicidad,
+            documento_doc.revista.periodicidad
         )
 
         # Desglose pais_revista
