@@ -48,6 +48,7 @@ class Pais(Document):
 
 class Idioma(Document):
     """Esquema de catálogo idioma
+    _id : Código ISO 639-3
     iso_639_1:códigos de dos letras usados para identificar los idiomas
     principales del mundo
     iso_639_2:códigos de tres letras usados para identificar los idiomas
@@ -55,7 +56,7 @@ class Idioma(Document):
     """
     _id = StringField(max_length=3, primary_key=True, required=True)
     iso_639_1 = StringField(min_length=2, max_length=2)
-    iso_639_2 = StringField(min_length=3, max_length=3, required=True)
+    iso_639_3 = StringField(min_length=3, max_length=3, required=True)
     nombre = EmbeddedDocumentField(I18NField)
 
     meta = {
@@ -63,7 +64,7 @@ class Idioma(Document):
         'indexes': [
             'nombre.es',
             'iso_639_1',
-            'iso_639_2',
+            'iso_639_3',
         ]
     }
 
