@@ -11,6 +11,7 @@ from biblat_schema.catalogs import (
     Disciplina
 )
 from biblat_schema.marc import MarcDocumentField
+from biblat_schema.choices import FREQUENCY
 from biblat_schema.models import (
     HistorialCatalogacion,
     Historico, Revista,
@@ -34,7 +35,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         idioma_data = {
             '_id': _id,
             'iso_639_1': 'es',
-            'iso_639_2': 'spa',
+            'iso_639_3': 'spa',
             'nombre': nombre
         }
         return Idioma(**idioma_data)
@@ -123,6 +124,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         pais = self._crea_pais()
         pais.save()
         disciplina = self._crea_disciplina()
+        periodicidad = FREQUENCY[0][0]
         revista_data = {
             '_id': _id,
             'base_datos': 'CLA01',
@@ -132,6 +134,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
             'disciplina': disciplina,
             'fecha_creacion': datetime.now(),
             'fecha_actualizacion': datetime.now(),
+            'periodicidad': periodicidad
         }
         return Revista(**revista_data)
 
@@ -313,6 +316,10 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         self.assertEqual(
             documento.fasciculo.revista.fecha_actualizacion,
             historial_catalogacion_doc.documento.fasciculo.revista.fecha_actualizacion
+        )
+        self.assertEqual(
+            documento.fasciculo.revista.periodicidad,
+            historial_catalogacion_doc.documento.fasciculo.revista.periodicidad
         )
 
         self.assertEqual(

@@ -3,6 +3,7 @@ from datetime import datetime
 
 from biblat_schema.models import Revista, Pais
 from biblat_schema.catalogs import DisciplinaRevista
+from biblat_schema.choices import FREQUENCY
 from .base import BaseTestCase
 
 
@@ -56,6 +57,8 @@ class TestJournalModel(BaseTestCase):
 
         # Datos
         revista_id = self.generate_uuid_32_string()
+        periodicidad = FREQUENCY[0][0]
+
         revista_data = {
             '_id': revista_id,
             'base_datos': 'PER01',
@@ -65,6 +68,7 @@ class TestJournalModel(BaseTestCase):
             'disciplina': disciplina_doc,
             'fecha_creacion': datetime.now(),
             'fecha_actualizacion': datetime.now(),
+            'periodicidad': periodicidad
         }
 
         # Guardamos
@@ -95,6 +99,10 @@ class TestJournalModel(BaseTestCase):
         self.assertEqual(
             disciplina_doc,
             revista_doc.disciplina
+        )
+        self.assertEqual(
+            periodicidad,
+            revista_doc.periodicidad
         )
         self.assertEqual(
             1,
