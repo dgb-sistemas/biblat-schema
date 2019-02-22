@@ -10,13 +10,11 @@ class TestGeographicNameModel(BaseTestCase):
         """Pruebas unitarias de campos requeridos del catalogo Nombre
         Geografico"""
         # Datos
-        _id = self.generate_uuid_32_string()
         nombre = I18NField(**{
             'es': 'Estados Unidos de Norteamerica',
             'en': 'United States of America'
         })
         nombre_geografico_data = {
-            '_id': _id,
             'nombre': nombre
         }
 
@@ -25,10 +23,6 @@ class TestGeographicNameModel(BaseTestCase):
             **nombre_geografico_data)
         nombre_geografico_doc.save()
         # Comprobamos
-        self.assertEqual(
-            nombre_geografico_data['_id'],
-            nombre_geografico_doc.id
-        )
         self.assertEqual(
             nombre_geografico_data['nombre'],
             nombre_geografico_doc.nombre

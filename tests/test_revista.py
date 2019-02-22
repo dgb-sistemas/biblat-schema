@@ -11,9 +11,7 @@ class TestJournalModel(BaseTestCase):
     model_class_to_delete = [Revista, DisciplinaRevista, Pais]
 
     def _crear_disciplina_revista_prueba(self):
-        disciplina_id = self.generate_uuid_32_string()
         disciplina_data = {
-            '_id': disciplina_id,
             'nombre': {
                 'es': u'Multidisciplinaria',
                 'en': 'Multidisciplinary'
@@ -56,11 +54,9 @@ class TestJournalModel(BaseTestCase):
         })
 
         # Datos
-        revista_id = self.generate_uuid_32_string()
         periodicidad = FREQUENCY[0][0]
 
         revista_data = {
-            '_id': revista_id,
             'base_datos': 'PER01',
             'titulo': u'Estudios de cultura náhuatl',
             'issn': '2007-0705',
@@ -76,10 +72,6 @@ class TestJournalModel(BaseTestCase):
         revista_doc.save()
 
         # Comprobamos
-        self.assertEqual(
-            revista_id,
-            revista_doc.id
-        )
         self.assertEqual(
             revista_data['base_datos'],
             revista_doc.base_datos

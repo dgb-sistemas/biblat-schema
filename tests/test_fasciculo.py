@@ -11,10 +11,7 @@ class TestFascicleModel(BaseTestCase):
     model_class_to_delete = [Fasciculo, Revista]
 
     def _crea_pais(self):
-        _id = self.generate_uuid_32_string()
-
         pais_data = {
-            '_id': _id,
             "nombre": {
                 "es": "",
                 "en": "Mexico"
@@ -43,12 +40,10 @@ class TestFascicleModel(BaseTestCase):
         return Pais(**pais_data)
 
     def _crea_revista(self):
-        _id = self.generate_uuid_32_string()
         pais = self._crea_pais()
         disciplina = self._crea_disciplina()
         periodicidad = FREQUENCY[0][0]
         revista_data = {
-            '_id': _id,
             'base_datos': 'PER01',
             'titulo': u'Estudios de cultura náhuatl',
             'issn': '2007-0705',
@@ -61,9 +56,7 @@ class TestFascicleModel(BaseTestCase):
         return Revista(**revista_data)
 
     def _crea_disciplina(self):
-        _id = self.generate_uuid_32_string()
         disciplina_data = {
-            '_id': _id,
             'nombre': {
                 'es': 'Biologia',
                 'en': 'Biology'
@@ -77,9 +70,7 @@ class TestFascicleModel(BaseTestCase):
         revista_doc = self._crea_revista()
 
         # Datos
-        _id = self.generate_uuid_32_string()
         fasciculo_data = {
-            '_id': _id,
             'revista': revista_doc,
             'volumen': 7,
             'numero': 14,
@@ -96,11 +87,6 @@ class TestFascicleModel(BaseTestCase):
         fasciculo_doc.save()
 
         # Comprobamos
-        self.assertEqual(
-            _id,
-            fasciculo_doc.id
-        )
-
         # Desglose revista
         self.assertEqual(
             revista_doc,

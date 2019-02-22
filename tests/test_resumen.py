@@ -8,13 +8,11 @@ class TestSummaryModel(BaseTestCase):
     model_class_to_delete = [Resumen, Idioma, I18NField]
 
     def _crea_idioma(self):
-        _id = self.generate_uuid_32_string()
         nombre = I18NField(**{
             'es': 'Español',
             'en': 'Spanish'
         })
         idioma_data = {
-            '_id': _id,
             'iso_639_1': 'es',
             'iso_639_3': 'spa',
             'nombre': nombre
@@ -24,6 +22,7 @@ class TestSummaryModel(BaseTestCase):
     def test_solo_campos_requeridos(self):
         """Pruebas unitarias de campos requeridos del modelo Resumen"""
         idioma = self._crea_idioma()
+        idioma.save()
 
         resumen_data = {
             'idioma': idioma,

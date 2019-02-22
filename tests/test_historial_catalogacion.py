@@ -27,13 +27,11 @@ class TestCatalogationHistoricalModel(BaseTestCase):
     model_class_to_delete = [HistorialCatalogacion, Historico]
 
     def _crea_idioma(self):
-        _id = self.generate_uuid_32_string()
         nombre = I18NField(** {
             'es': 'Español',
             'en': 'Spanish'
         })
         idioma_data = {
-            '_id': _id,
             'iso_639_1': 'es',
             'iso_639_3': 'spa',
             'nombre': nombre
@@ -41,10 +39,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         return Idioma(**idioma_data)
 
     def _crea_pais(self):
-        _id = self.generate_uuid_32_string()
-
         pais_data = {
-            '_id': 'MX',
             "nombre": {
                 "es": "",
                 "en": "Mexico"
@@ -73,10 +68,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         return Pais(**pais_data)
 
     def _crea_tipo_documento(self):
-        _id = self.generate_uuid_32_string()
-
         tipo_documento_data = {
-            '_id': _id,
             'nombre': {
                 'es': 'Biologia',
                 'en': 'Biology'
@@ -89,9 +81,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         return TipoDocumento(**tipo_documento_data)
 
     def _crea_enfoque_documento(self):
-        _id = self.generate_uuid_32_string()
         enfoque_documento_data = {
-            '_id': _id,
             'nombre': {
                 'es': 'Biologia',
                 'en': 'Biology'
@@ -104,9 +94,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         return EnfoqueDocumento(**enfoque_documento_data)
 
     def _crea_disciplina(self):
-        _id = self.generate_uuid_32_string()
         disciplina_data = {
-            '_id': _id,
             'nombre': {
                 'es': 'Biologia',
                 'en': 'Biology'
@@ -120,13 +108,11 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         return MarcDocumentField(**marc_document_data)
 
     def _crea_revista(self):
-        _id = self.generate_uuid_32_string()
         pais = self._crea_pais()
         pais.save()
         disciplina = self._crea_disciplina()
         periodicidad = FREQUENCY[0][0]
         revista_data = {
-            '_id': _id,
             'base_datos': 'CLA01',
             'titulo': u'Estudios de cultura náhuatl',
             'issn': '0071-1675',
@@ -139,10 +125,8 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         return Revista(**revista_data)
 
     def _crea_fasciculo(self):
-        _id = self.generate_uuid_32_string()
         revista_doc = self._crea_revista()
         fasciculo_data = {
-            '_id': _id,
             'revista': revista_doc,
             'volumen': 1,
             'numero': 2,
@@ -172,10 +156,7 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         enfoque_documento = self._crea_enfoque_documento()
         disciplina = revista.disciplina
 
-        _id = self.generate_uuid_32_string()
-
         documento_data = {
-            '_id': _id,
             'revista': revista,
             'fasciculo': fasciculo,
             'numero_sistema': '000463924',
@@ -222,10 +203,8 @@ class TestCatalogationHistoricalModel(BaseTestCase):
         # Datos
         historico = self._crea_historico()
         historico2 = self._crea_historico2()
-        _id = self.generate_uuid_32_string()
         documento = self._crea_documento()
         historial_catalogacion_data = {
-            '_id': _id,
             'documento': documento,
             'catalogacion': [historico]
         }
@@ -459,6 +438,6 @@ class TestCatalogationHistoricalModel(BaseTestCase):
             historial_catalogacion_doc.catalogacion[1].fecha_hora
         )
         self.assertEqual(
-            1,
+            2,
             HistorialCatalogacion.objects.all().count()
         )

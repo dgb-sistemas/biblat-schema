@@ -9,10 +9,7 @@ class TestCorporativeAuthorModel(BaseTestCase):
     model_class_to_delete = [AutorCorporativo, Pais]
 
     def _crea_pais(self):
-        _id = self.generate_uuid_32_string()
-
         pais_data = {
-            '_id': _id,
             "nombre": {
               "es": "",
               "en": "Mexico"
@@ -44,6 +41,7 @@ class TestCorporativeAuthorModel(BaseTestCase):
         Corporativo"""
         # Datos
         pais = self._crea_pais()
+        pais.save()
         autor_corporativo_data = {
             'institucion': 'Universidad Veracruzana',
             'dependencia': 'Escuela de Instrumentación Electrónica y '

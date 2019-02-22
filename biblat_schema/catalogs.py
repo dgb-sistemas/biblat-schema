@@ -9,6 +9,8 @@ from mongoengine import (
     ListField
 )
 
+from . import generate_uuid_32_string
+
 
 class I18NField(EmbeddedDocument):
     es = StringField()
@@ -17,12 +19,12 @@ class I18NField(EmbeddedDocument):
 
 class Pais(Document):
     """Esquema de catálogo país
+    _id: Código ISO 3166-2
     alpha2: código de país en dos letras designado para representar la
     mayoría de los lenguajes en el mundo
     alpha: código de país en tres caracteres
     codigo_pais: Código numérico de país
-    iso_3166-2: Código de 3 letras que brinda mas combinaciones, pudiendo
-    cubrir mas lenguajes
+    iso_3166-2: Descripción del ISO 3166-2
     """
     _id = StringField(max_length=2, primary_key=True, required=True)
     nombre = EmbeddedDocumentField(I18NField)
@@ -44,6 +46,13 @@ class Pais(Document):
             'alpha2'
         ]
     }
+
+    def save(self, *args, **kwargs):
+        """Override save in Pais"""
+        if not self._id:
+            self._id = self.alpha2
+
+        return super(Pais, self).save(*args, **kwargs)
 
 
 class Idioma(Document):
@@ -68,10 +77,18 @@ class Idioma(Document):
         ]
     }
 
+    def save(self, *args, **kwargs):
+        """Override save Idioma"""
+        if not self._id:
+            self._id = self.iso_639_3
+
+        return super(Idioma, self).save(*args, **kwargs)
+
 
 class TipoDocumento(Document):
     """Esquema de catálogo tipo documento"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     nombre = EmbeddedDocumentField(I18NField)
     descripcion = EmbeddedDocumentField(I18NField)
 
@@ -85,7 +102,8 @@ class TipoDocumento(Document):
 
 class EnfoqueDocumento(Document):
     """Esquema de catálogo enfoque documento"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     nombre = EmbeddedDocumentField(I18NField)
     descripcion = EmbeddedDocumentField(I18NField)
 
@@ -99,7 +117,8 @@ class EnfoqueDocumento(Document):
 
 class Disciplina(Document):
     """Esquema de catálogo disciplina"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     nombre = EmbeddedDocumentField(I18NField)
 
     meta = {
@@ -112,7 +131,8 @@ class Disciplina(Document):
 
 class SubDisciplina(Document):
     """Esquema de catálogo subdisciplina"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     disciplina = ReferenceField(Disciplina, required=True)
     nombre = EmbeddedDocumentField(I18NField)
 
@@ -127,7 +147,8 @@ class SubDisciplina(Document):
 
 class NombreGeografico(Document):
     """Esquema de catálogo nombre geográfico"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     nombre = EmbeddedDocumentField(I18NField)
     nota = EmbeddedDocumentField(I18NField)
 
@@ -141,7 +162,8 @@ class NombreGeografico(Document):
 
 class DisciplinaRevista(Document):
     """Esquema de catálogo disciplina revista"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     base = ListField(StringField(max_length=10, required=True))
     nombre = EmbeddedDocumentField(I18NField)
 
@@ -159,7 +181,8 @@ class LicenciaCC(Document):
     tipo: tipo de licencia creative commons
     url: url del legal code de la licencia
     """
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     tipo = StringField(max_length=6, required=True)
     url = URLField(required=True)
 
@@ -176,7 +199,8 @@ class SherpaRomeo(Document):
     politica: especificacion de la politica utilizada
     codigo: codigo hexagecimal utilizado por el color
     """
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     color = EmbeddedDocumentField(I18NField)
     politica = EmbeddedDocumentField(I18NField)
     codigo = StringField(required=True)
