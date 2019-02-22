@@ -8,13 +8,11 @@ class TestKeyWordModel(BaseTestCase):
     model_class_to_delete = [PalabraClave, I18NField, Idioma]
 
     def _crea_idioma(self):
-        _id = self.generate_uuid_32_string()
         nombre = I18NField(** {
             'es': 'Español',
             'en': 'Spanish'
         })
         idioma_data = {
-            '_id': _id,
             'iso_639_1': 'es',
             'iso_639_3': 'spa',
             'nombre': nombre
@@ -25,6 +23,7 @@ class TestKeyWordModel(BaseTestCase):
         """Pruebas unitarias de campos requeridos del modelo Palabra Clave"""
         # Datos
         idioma = self._crea_idioma()
+        idioma.save()
         palabra_clave_data = {
             'idioma': idioma,
             'palabra_clave': 'estudio'

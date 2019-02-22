@@ -1,5 +1,4 @@
 # coding: utf-8
-import uuid
 import unittest
 from mongoengine import connect
 
@@ -23,6 +22,3 @@ class BaseTestCase(unittest.TestCase):
 
     def tearDown(self):
         self.connection.drop_database('mongotest')
-
-    def generate_uuid_32_string(self):
-        return str(uuid.uuid4().hex)

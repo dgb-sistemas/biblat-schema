@@ -7,10 +7,7 @@ class TestInstitutionModel(BaseTestCase):
     model_class_to_delete = [Institucion, Pais]
 
     def _crea_pais(self):
-        _id = self.generate_uuid_32_string()
-
         pais_data = {
-            '_id': _id,
             "nombre": {
               "es": "",
               "en": "Mexico"
@@ -41,6 +38,7 @@ class TestInstitutionModel(BaseTestCase):
         """Pruebas unitarias de campos requeridos del modelo Institucion"""
         # Datos
         pais = self._crea_pais()
+        pais.save()
         institucion_data = {
             'institucion': 'Universidad de Chapingo ',
             'dependencia': 'Filosofia',

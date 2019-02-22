@@ -13,6 +13,7 @@ from mongoengine import (
     URLField
 )
 
+from . import generate_uuid_32_string
 from .marc import MarcDocumentField
 from .choices import FREQUENCY
 from .catalogs import (
@@ -46,7 +47,8 @@ class Revista(Document):
     fecha_creacion: fecha en que fue creada la revista
     fecha_actualizacion: fecha en que se actualizaron los datos
     """
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     base_datos = StringField(max_length=5, required=True)
     titulo = StringField(max_length=256, required=True)
     titulo_abreviado = StringField(max_length=256)
@@ -89,7 +91,8 @@ class Fasciculo(Document):
     fecha_creacion:
     fecha_actualizacion:
     """
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     revista = ReferenceField(Revista, required=True)
     volumen = IntField()
     numero = IntField()
@@ -180,7 +183,8 @@ class Documento(Document):
     """Esquema de documento
     doi: identificador de objeto digital
     """
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     revista = ReferenceField(Revista, required=True)
     fasciculo = ReferenceField(Fasciculo, required=True)
     numero_sistema = StringField(max_length=14, required=True)
@@ -234,7 +238,8 @@ class Historico(EmbeddedDocument):
 
 class HistorialCatalogacion(Document):
     """Esquema de historial de catalogación"""
-    _id = StringField(max_length=32, primary_key=True, required=True)
+    _id = StringField(max_length=32, primary_key=True, required=True,
+                      default=lambda: generate_uuid_32_string())
     documento = ReferenceField(Documento, required=True)
     catalogacion = EmbeddedDocumentListField(Historico, required=True)
 
