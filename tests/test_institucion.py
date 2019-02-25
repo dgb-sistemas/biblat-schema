@@ -24,13 +24,13 @@ class TestInstitutionModel(BaseTestCase):
               "es": "",
               "en": "Latin America and the Caribbean"
             },
-            "intermediate_region": {
+            "region_intermedia": {
               "es": "Centroamérica",
               "en": "Central America"
             },
             "codigo_region": "019",
             "codigo_sub_region": "419",
-            "region_intermedia": "013"
+            "codigo_region_intermedia": "013"
         }
         return Pais(**pais_data)
 
@@ -101,8 +101,8 @@ class TestInstitutionModel(BaseTestCase):
             institucion_doc.pais.sub_region
         )
         self.assertEqual(
-            pais.intermediate_region,
-            institucion_doc.pais.intermediate_region
+            pais.region_intermedia,
+            institucion_doc.pais.region_intermedia
         )
         self.assertEqual(
             pais.codigo_region,
@@ -113,8 +113,8 @@ class TestInstitutionModel(BaseTestCase):
             institucion_doc.pais.codigo_sub_region
         )
         self.assertEqual(
-            pais.region_intermedia,
-            institucion_doc.pais.region_intermedia
+            pais.codigo_region_intermedia,
+            institucion_doc.pais.codigo_region_intermedia
         )
 
         self.assertEqual(

@@ -60,13 +60,13 @@ class TestDocumentModel(BaseTestCase):
                 "es": "",
                 "en": "Latin America and the Caribbean"
             },
-            "intermediate_region": {
+            "region_intermedia": {
                 "es": "Centroamérica",
                 "en": "Central America"
             },
             "codigo_region": "019",
             "codigo_sub_region": "419",
-            "region_intermedia": "013"
+            "codigo_region_intermedia": "013"
         }
 
         return Pais(**pais_data)
@@ -337,8 +337,8 @@ class TestDocumentModel(BaseTestCase):
             documento_doc.revista.pais.sub_region
         )
         self.assertEqual(
-            pais_revista.intermediate_region,
-            documento_doc.revista.pais.intermediate_region
+            pais_revista.region_intermedia,
+            documento_doc.revista.pais.region_intermedia
         )
         self.assertEqual(
             pais_revista.codigo_region,
@@ -349,8 +349,8 @@ class TestDocumentModel(BaseTestCase):
             documento_doc.revista.pais.codigo_sub_region
         )
         self.assertEqual(
-            pais_revista.region_intermedia,
-            documento_doc.revista.pais.region_intermedia
+            pais_revista.codigo_region_intermedia,
+            documento_doc.revista.pais.codigo_region_intermedia
         )
         # desglose disciplina
         self.assertEqual(
@@ -496,8 +496,8 @@ class TestDocumentModel(BaseTestCase):
             documento_doc.autor_corporativo[0].pais.sub_region
         )
         self.assertEqual(
-            pais_autor_corporativo.intermediate_region,
-            documento_doc.autor_corporativo[0].pais.intermediate_region
+            pais_autor_corporativo.region_intermedia,
+            documento_doc.autor_corporativo[0].pais.region_intermedia
         )
         self.assertEqual(
             pais_autor_corporativo.codigo_region,
@@ -508,8 +508,8 @@ class TestDocumentModel(BaseTestCase):
             documento_doc.autor_corporativo[0].pais.codigo_sub_region
         )
         self.assertEqual(
-            pais_autor_corporativo.region_intermedia,
-            documento_doc.autor_corporativo[0].pais.region_intermedia
+            pais_autor_corporativo.codigo_region_intermedia,
+            documento_doc.autor_corporativo[0].pais.codigo_region_intermedia
         )
 
         # Desglose Institucion
@@ -572,8 +572,8 @@ class TestDocumentModel(BaseTestCase):
             documento_doc.institucion[0].pais.sub_region
         )
         self.assertEqual(
-            pais_institucion.intermediate_region,
-            documento_doc.institucion[0].pais.intermediate_region
+            pais_institucion.region_intermedia,
+            documento_doc.institucion[0].pais.region_intermedia
         )
         self.assertEqual(
             pais_institucion.codigo_region,
@@ -584,8 +584,8 @@ class TestDocumentModel(BaseTestCase):
             documento_doc.institucion[0].pais.codigo_sub_region
         )
         self.assertEqual(
-            pais_institucion.region_intermedia,
-            documento_doc.institucion[0].pais.region_intermedia
+            pais_institucion.codigo_region_intermedia,
+            documento_doc.institucion[0].pais.codigo_region_intermedia
         )
 
         # Desglose resumen

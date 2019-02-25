@@ -26,13 +26,13 @@ class TestCorporativeAuthorModel(BaseTestCase):
               "es": "",
               "en": "Latin America and the Caribbean"
             },
-            "intermediate_region": {
+            "region_intermedia": {
               "es": "Centroamérica",
               "en": "Central America"
             },
             "codigo_region": "019",
             "codigo_sub_region": "419",
-            "region_intermedia": "013"
+            "codigo_region_intermedia": "013"
           }
         return Pais(**pais_data)
 
@@ -100,8 +100,8 @@ class TestCorporativeAuthorModel(BaseTestCase):
             autor_corporativo_doc.pais['sub_region']
         )
         self.assertEqual(
-            autor_corporativo_data['pais'].intermediate_region,
-            autor_corporativo_doc.pais['intermediate_region']
+            autor_corporativo_data['pais'].region_intermedia,
+            autor_corporativo_doc.pais['region_intermedia']
         )
         self.assertEqual(
             autor_corporativo_data['pais'].codigo_region,
@@ -112,6 +112,6 @@ class TestCorporativeAuthorModel(BaseTestCase):
             autor_corporativo_doc.pais['codigo_sub_region']
         )
         self.assertEqual(
-            autor_corporativo_data['pais'].region_intermedia,
-            autor_corporativo_doc.pais['region_intermedia']
+            autor_corporativo_data['pais'].codigo_region_intermedia,
+            autor_corporativo_doc.pais['codigo_region_intermedia']
         )
