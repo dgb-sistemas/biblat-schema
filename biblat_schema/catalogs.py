@@ -114,17 +114,18 @@ class EnfoqueDocumento(Document):
         ]
     }
 
-
 class Disciplina(Document):
     """Esquema de catálogo disciplina"""
     _id = StringField(max_length=32, primary_key=True, required=True,
                       default=lambda: generate_uuid_32_string())
+    base = ListField(StringField(max_length=10, required=True))
     nombre = EmbeddedDocumentField(I18NField)
 
     meta = {
-        'collection': 'disciplinas',
+        'collection': 'disciplinas_revista',
         'indexes': [
-            'nombre.es'
+            'nombre.es',
+            'base'
         ]
     }
 
@@ -156,22 +157,6 @@ class NombreGeografico(Document):
         'collection': 'nombres_geograficos',
         'indexes': [
             'nombre.es'
-        ]
-    }
-
-
-class DisciplinaRevista(Document):
-    """Esquema de catálogo disciplina revista"""
-    _id = StringField(max_length=32, primary_key=True, required=True,
-                      default=lambda: generate_uuid_32_string())
-    base = ListField(StringField(max_length=10, required=True))
-    nombre = EmbeddedDocumentField(I18NField)
-
-    meta = {
-        'collection': 'disciplinas_revista',
-        'indexes': [
-            'nombre.es',
-            'base'
         ]
     }
 

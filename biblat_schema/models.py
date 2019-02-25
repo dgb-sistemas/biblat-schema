@@ -17,7 +17,7 @@ from . import generate_uuid_32_string
 from .marc import MarcDocumentField
 from .choices import FREQUENCY
 from .catalogs import (
-    DisciplinaRevista,
+    Disciplina,
     Pais,
     LicenciaCC,
     SherpaRomeo,
@@ -55,7 +55,7 @@ class Revista(Document):
     issn = StringField(max_length=9, required=True)
     issn_electronico = StringField(max_length=9)
     pais = ReferenceField(Pais, required=True)
-    disciplina = ReferenceField(DisciplinaRevista, required=True)
+    disciplina = ReferenceField(Disciplina, required=True)
     licencia_cc = ReferenceField(LicenciaCC)
     sherpa_romeo = ReferenceField(SherpaRomeo)
     idioma = ListField(ReferenceField(Idioma))

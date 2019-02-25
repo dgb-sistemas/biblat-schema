@@ -2,13 +2,13 @@
 from datetime import datetime
 
 from biblat_schema.models import Revista, Pais
-from biblat_schema.catalogs import DisciplinaRevista
+from biblat_schema.catalogs import Disciplina
 from biblat_schema.choices import FREQUENCY
 from .base import BaseTestCase
 
 
 class TestJournalModel(BaseTestCase):
-    model_class_to_delete = [Revista, DisciplinaRevista, Pais]
+    model_class_to_delete = [Revista, Disciplina, Pais]
 
     def _crear_disciplina_revista_prueba(self):
         disciplina_data = {
@@ -17,7 +17,7 @@ class TestJournalModel(BaseTestCase):
                 'en': 'Multidisciplinary'
             }
         }
-        disciplina_doc = DisciplinaRevista(**disciplina_data)
+        disciplina_doc = Disciplina(**disciplina_data)
         return disciplina_doc
 
     def test_solo_campos_requeridos(self):
