@@ -26,13 +26,13 @@ class TestGeographicNameModel(BaseTestCase):
                 "es": "",
                 "en": "Latin America and the Caribbean"
             },
-            "intermediate_region": {
+            "region_intermedia": {
                 "es": "Centroamérica",
                 "en": "Central America"
             },
             "codigo_region": "019",
             "codigo_sub_region": "419",
-            "region_intermedia": "013"
+            "codigo_region_intermedia": "013"
         }
         pais_doc = Pais(**pais_data)
         pais_doc.save()
@@ -84,12 +84,12 @@ class TestGeographicNameModel(BaseTestCase):
             pais_doc.sub_region['en']
         )
         self.assertEqual(
-            pais_data['intermediate_region']['es'],
-            pais_doc.intermediate_region['es']
+            pais_data['region_intermedia']['es'],
+            pais_doc.region_intermedia['es']
         )
         self.assertEqual(
-            pais_data['intermediate_region']['en'],
-            pais_doc.intermediate_region['en']
+            pais_data['region_intermedia']['en'],
+            pais_doc.region_intermedia['en']
         )
         self.assertEqual(
             pais_data['codigo_region'],
@@ -100,8 +100,8 @@ class TestGeographicNameModel(BaseTestCase):
             pais_doc.codigo_sub_region
         )
         self.assertEqual(
-            pais_data['region_intermedia'],
-            pais_doc.region_intermedia
+            pais_data['codigo_region_intermedia'],
+            pais_doc.codigo_region_intermedia
         )
         self.assertEqual(
             1,

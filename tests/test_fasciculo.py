@@ -28,13 +28,13 @@ class TestFascicleModel(BaseTestCase):
                 "es": "",
                 "en": "Latin America and the Caribbean"
             },
-            "intermediate_region": {
+            "region_intermedia": {
                 "es": "Centroamérica",
                 "en": "Central America"
             },
             "codigo_region": "019",
             "codigo_sub_region": "419",
-            "region_intermedia": "013"
+            "codigo_region_intermedia": "013"
         }
 
         return Pais(**pais_data)
@@ -147,8 +147,8 @@ class TestFascicleModel(BaseTestCase):
             fasciculo_doc.revista['pais'].sub_region
         )
         self.assertEqual(
-            revista_doc.pais.intermediate_region,
-            fasciculo_doc.revista['pais'].intermediate_region
+            revista_doc.pais.region_intermedia,
+            fasciculo_doc.revista['pais'].region_intermedia
         )
         self.assertEqual(
             revista_doc.pais.codigo_region,
@@ -159,8 +159,8 @@ class TestFascicleModel(BaseTestCase):
             fasciculo_doc.revista['pais'].codigo_sub_region
         )
         self.assertEqual(
-            revista_doc.pais.region_intermedia,
-            fasciculo_doc.revista['pais'].region_intermedia
+            revista_doc.pais.codigo_region_intermedia,
+            fasciculo_doc.revista['pais'].codigo_region_intermedia
         )
         # Desglose disciplina
         self.assertEqual(

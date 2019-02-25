@@ -31,13 +31,13 @@ class Pais(Document):
     alpha2 = StringField(max_length=2, required=True)
     alpha3 = StringField(max_length=3, required=True)
     codigo_pais = StringField(max_length=3, required=True)
-    iso_3166_2 = StringField(max_length=14, required=True)
+    iso_3166_2 = StringField(max_length=14)
     region = EmbeddedDocumentField(I18NField)
     sub_region = EmbeddedDocumentField(I18NField)
-    intermediate_region = EmbeddedDocumentField(I18NField)
-    codigo_region = StringField(max_length=3, required=True)
-    codigo_sub_region = StringField(max_length=3, required=True)
-    region_intermedia = StringField(max_length=3)
+    region_intermedia = EmbeddedDocumentField(I18NField)
+    codigo_region = StringField(max_length=3)
+    codigo_sub_region = StringField(max_length=3)
+    codigo_region_intermedia = StringField(max_length=3)
 
     meta = {
         'collection': 'paises',

@@ -44,13 +44,13 @@ class TestJournalModel(BaseTestCase):
                 'es': 'América Latina y el Caribe',
                 'en': 'Latin America and the Caribbean'
             },
-            'intermediate_region': {
+            'region_intermedia': {
                 'es': 'Centroamérica',
                 'en': 'Central America'
             },
             'codigo_region': '019',
             'codigo_sub_region': '419',
-            'region_intermedia': '013'
+            'codigo_region_intermedia': '013'
         })
 
         # Datos
