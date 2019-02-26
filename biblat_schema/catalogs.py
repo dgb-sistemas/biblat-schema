@@ -6,7 +6,8 @@ from mongoengine import (
     EmbeddedDocumentField,
     ReferenceField,
     URLField,
-    ListField
+    ListField,
+    BooleanField
 )
 
 from . import generate_uuid_32_string
@@ -58,14 +59,23 @@ class Pais(Document):
 class Idioma(Document):
     """Esquema de catálogo idioma
     _id : Código ISO 639-3
-    iso_639_1:códigos de dos letras usados para identificar los idiomas
-    principales del mundo
-    iso_639_2:códigos de tres letras usados para identificar los idiomas
-    principales del mundo
+    iso_639_1: Identificador 639-1 para identificar los idiomas principales
+    iso_639_3: Identificador 639-3 para identificar todos los lenguajes humanos
+               conocidos, incluyendo vivos, extintos, antiguos, históricos,
+               artificiales o de señas
+    iso_639_2b: Identificador 639-2 para aplicaciones bibliográficas
+    iso_639_2t: Identificador 639-2 para aplicaciones de terminología
+    type: Tipo de idioma A(ncient), C(onstructed),
+          E(xtinct), H(istorical), L(iving), S(pecial)
+    scope: Cobertura del idioma I(ndividual), M(acrolanguage), S(pecial)
     """
     _id = StringField(max_length=3, primary_key=True, required=True)
     iso_639_1 = StringField(min_length=2, max_length=2)
     iso_639_3 = StringField(min_length=3, max_length=3, required=True)
+    iso_639_2b = StringField(min_length=2, max_length=3)
+    iso_639_2t = StringField(min_length=2, max_length=3)
+    type = StringField(max_length=1)
+    scope = StringField(max_length=1)
     nombre = EmbeddedDocumentField(I18NField)
 
     meta = {
@@ -113,6 +123,7 @@ class EnfoqueDocumento(Document):
             'nombre.es'
         ]
     }
+
 
 class Disciplina(Document):
     """Esquema de catálogo disciplina"""
