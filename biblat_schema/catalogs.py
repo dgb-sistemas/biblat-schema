@@ -179,7 +179,7 @@ class LicenciaCC(Document):
     """
     _id = StringField(max_length=32, primary_key=True, required=True,
                       default=lambda: generate_uuid_32_string())
-    tipo = StringField(max_length=6, required=True)
+    tipo = StringField(max_length=16, required=True)
     url = URLField(required=True)
 
     meta = {
